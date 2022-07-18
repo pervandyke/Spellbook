@@ -9,7 +9,7 @@
 	</head>
 	
 	<body>
-	   <div class="d-flex w-100 justify-content-center">
+	   <div>
 	       <h2>Welcome to the Spellbook app!</h2>	   
 	   </div>
 	</body>
