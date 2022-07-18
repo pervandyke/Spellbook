@@ -1,7 +1,7 @@
 package com.vandyke.demoproject.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,12 +15,13 @@ public class LoginController {
         return "LoginPage";
     }
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(Model model, @ModelAttribute("login") Login login) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute("login") Login login, ModelMap model) {
+		
 		System.out.println("Login request recieved!");
-		System.out.println("Username was: " + login.getUserName());
-		if (login != null && login.getUserName() != null & login.getPassword() != null) {
-			model.addAttribute("user", login.getUserName());
+		System.out.println("Username was: " + login.getUsername());
+
+		if (login != null && login.getUsername() != "" && login.getPassword() != "") {
 			return "SpellbookPage";
 		} else {
 			model.addAttribute("error", "Try Again");

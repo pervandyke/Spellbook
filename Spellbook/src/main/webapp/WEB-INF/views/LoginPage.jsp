@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +34,7 @@
             <div class="card mt-3">
                 <h3 class="card-header">Login</h3>
                 <div class="card-body p-4">
-                    <form:form action="/login" method="POST">
+                    <form action="/login" method="POST">
 	                    <label>Username</label>
 	                    <input type="text" id="username" name="username" class="form-control" placeholder="username"
                             autofocus=""/>
@@ -43,9 +42,9 @@
 	                    <label>Password</label>
 	                    <input type="password" id="password" name="password" class="form-control" placeholder="password"/>
 	                    
-	                    <button class="btn btn-primary mt-2" type="submit" value="Submit">Submit</button>
+	                    <input type="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
 	                    <div style="background-color: white; color: red">${error}</div>
-                    </form:form>
+                    </form>
                 </div>
             </div>
                 
