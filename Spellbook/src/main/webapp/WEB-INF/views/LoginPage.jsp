@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Spellbook Home</title>
+        <title>Spellbook Login</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
@@ -21,8 +22,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="flex-grow: 0;">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                        <a class="nav-link" href="/login-page">Login</a>
+                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/login-page">Login</a>
                         <a class="nav-link" href="#">Register</a>
                     </div>
                 </div>
@@ -30,9 +31,24 @@
 
         </nav>
         <div class="container-lg">
-            
             <div class="d-flex w-100 justify-content-center">
-                <h2>Welcome to the Spellbook app!</h2>
+            <div class="card mt-3">
+                <h3 class="card-header">Login</h3>
+                <div class="card-body p-4">
+                    <form:form action="/login" method="POST">
+	                    <label>Username</label>
+	                    <input type="text" id="username" name="username" class="form-control" placeholder="username"
+                            autofocus=""/>
+	                    
+	                    <label>Password</label>
+	                    <input type="password" id="password" name="password" class="form-control" placeholder="password"/>
+	                    
+	                    <button class="btn btn-primary mt-2" type="submit" value="Submit">Submit</button>
+	                    <div style="background-color: white; color: red">${error}</div>
+                    </form:form>
+                </div>
+            </div>
+                
             </div>
         </div>
     
