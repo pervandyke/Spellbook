@@ -2,6 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.vandyke.demoproject</groupId>
     <artifactId>spellbook</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>Spellbook</name>
   
@@ -17,6 +18,39 @@
             <version>5.2.22.RELEASE</version>
         </dependency>
         
+        <!-- Jackson -->
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+        
+        
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
+        <!-- 
+        <dependency>                             
+            <groupId>org.slf4j</groupId>         
+            <artifactId>slf4j-api</artifactId>   
+            <version>1.7.30</version>  
+        </dependency> 
+        <dependency>                             
+            <groupId>org.slf4j</groupId>         
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version>  
+        </dependency>
+        -->
     </dependencies>
     
     <build>
@@ -34,6 +68,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
+                <configuration>
+                    <warSourceDirectory>
+                        <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                        <warName>Spellbook</warName>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </warSourceDirectory>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -53,6 +94,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        
+        <finalName>Spellbook</finalName>
     </build>
     
 </project>
