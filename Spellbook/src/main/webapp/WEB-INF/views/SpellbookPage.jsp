@@ -43,7 +43,7 @@
             <h1 class="text-center">Spellbook Page</h1>
             <h3 class="text-center mb-5">Welcome ${name}</h3>
             
-            <div ng-app="SpellbookApp" ng-controller="spellController as ctrl" class="w-100">
+            <div ng-app="SpellbookApp" ng-controller="SpellController as sc" class="w-100">
                 <div class="d-flex row">
                     <div id="formContainer" class="col-md-3">
                         <h5>Add a Spell!</h5>
@@ -95,7 +95,8 @@
                         <div id="cantrip" class="text-center">
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
-                            <spellListing spell="ctrl.testSpell"></spellListing>
+                            <p>{{sc.testSpell.name}}</p>
+                            <spellListing spell="sc.testSpell"></spellListing>
                         </div>
                         <div id="levelOne" class="text-center">
                             <h5>1st Level</h5>
@@ -146,16 +147,9 @@
             crossorigin="anonymous">
         </script>
 
-        <!-- Temp AngularJS Script -->
-        <script>
-            const app = angular.module('SpellbookApp', []);
-
-            app.controller('spellController', function() {
-                testSpell = {
-                    name: "Test Spell"
-                }
-            });
-        </script>
+        <!-- AngularJS Scripts -->
+        <script src="static/angularJS/app.js"></script>
+        <script src="static/angularJS/controllers/spellController.js"></script>
         <script src="static/angularJS/components/SpellListing/spellListing.js"></script>
 	</body>
 </html>
