@@ -22,6 +22,7 @@ public class LoginController {
 		System.out.println("Username was: " + login.getUsername());
 
 		if (login != null && login.getUsername() != "" && login.getPassword() != "") {
+			model.addAttribute("name", login.getUsername());
 			return "SpellbookPage";
 		} else {
 			model.addAttribute("error", "Try Again");
