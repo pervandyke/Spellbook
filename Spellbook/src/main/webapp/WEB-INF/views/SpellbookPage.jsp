@@ -95,6 +95,7 @@
                         <div id="cantrip" class="text-center">
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
+                            <spellListing></spellListing>
                         </div>
                         <div id="levelOne" class="text-center">
                             <h5>1st Level</h5>
@@ -153,5 +154,6 @@
 
             });
         </script>
+        <script src="static/angularJS/components/SpellListing/SpellListing.js"></script>
 	</body>
 </html>
