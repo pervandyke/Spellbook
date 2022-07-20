@@ -39,7 +39,7 @@
             <div class="card mt-3">
                 <h3 class="card-header">Login</h3>
                 <div class="card-body p-4">
-                    <form action="/login" method="POST">
+                    <form action="/spellbook" method="POST">
 	                    <label>Username</label>
 	                    <input type="text" id="username" name="username" class="form-control" placeholder="username"
                             autofocus=""/>

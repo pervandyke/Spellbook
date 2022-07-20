@@ -10,23 +10,20 @@ import com.vandyke.demoproject.model.Login;
 
 @Controller
 public class LoginController {
-	@RequestMapping(value = "/login-page", method = RequestMethod.GET)
+    @RequestMapping(value = "/login-page", method = RequestMethod.GET)
     public String getHomePage() {
         return "LoginPage";
     }
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute("login") Login login, ModelMap model) {
-		
-		System.out.println("Login request recieved!");
-		System.out.println("Username was: " + login.getUsername());
+    
+    @RequestMapping(value = "/spellbook", method = RequestMethod.POST)
+    public String login(@ModelAttribute("login") Login login, ModelMap model) {
 
-		if (login != null && login.getUsername() != "" && login.getPassword() != "") {
-			model.addAttribute("name", login.getUsername());
-			return "SpellbookPage";
-		} else {
-			model.addAttribute("error", "Try Again");
-			return "LoginPage";
-		}
-	}
+        if (login != null && login.getUsername() != "" && login.getPassword() != "") {
+            model.addAttribute("name", login.getUsername());
+            return "SpellbookPage";
+        } else {
+            model.addAttribute("error", "Try Again");
+            return "LoginPage";
+        }
+    }
 }

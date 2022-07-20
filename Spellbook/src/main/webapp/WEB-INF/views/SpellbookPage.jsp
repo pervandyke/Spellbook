@@ -43,8 +43,7 @@
             </div>
         </nav>
         <div class="container-fluid ps-5 pe-5">
-            <h1 class="text-center">Spellbook Page</h1>
-            <h3 class="text-center mb-5">Welcome ${name}</h3>
+            <h3 class="text-center mb-5 mt-3">${name}'s Spellbook</h3>
             
             <div ng-app="SpellbookApp" ng-controller="SpellController as sc" class="w-100">
                 <div class="d-flex row">
@@ -99,12 +98,20 @@
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
 
-                            <div ng-repeat="spell in spells" class="card">
+                            <div ng-repeat="spell in spells" class="card mb-1">
                                 <div class="card-header">
-                                    <h6>{{spell.name}}</h6>
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <p>Lorem Ipsum...</p>
+                                    <p>{{spell.description}}</p>
                                 </div>
                             </div>
 
