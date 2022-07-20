@@ -41,11 +41,10 @@
                 <div class="card-body p-4">
                     <form action="/spellbook" method="POST">
 	                    <label>Username</label>
-	                    <input type="text" id="username" name="username" class="form-control" placeholder="username"
-                            autofocus=""/>
+	                    <input type="text" id="username" name="username" class="form-control" placeholder="username" autofocus="" required/>
 	                    
 	                    <label>Password</label>
-	                    <input type="password" id="password" name="password" class="form-control" placeholder="password"/>
+	                    <input type="password" id="password" name="password" class="form-control" placeholder="password" required/>
 	                    
 	                    <input type="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
 	                    <div style="background-color: white; color: red">${error}</div>
