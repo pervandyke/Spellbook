@@ -19,6 +19,7 @@
         <!-- AngularJS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
         <script src="static/angularJS/app.js"></script>
+        <script src="static/angularJS/services/spellService.js"></script>
         <script src="static/angularJS/controllers/spellController.js"></script>
 	</head>
 	
