@@ -18,6 +18,8 @@
         />
         <!-- AngularJS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+        <script src="static/angularJS/app.js"></script>
+        <script src="static/angularJS/controllers/spellController.js"></script>
 	</head>
 	
 	<body>
@@ -95,8 +97,16 @@
                         <div id="cantrip" class="text-center">
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
-                            <p>{{sc.testSpell.name}}</p>
-                            <spellListing spell="sc.testSpell"></spellListing>
+
+                            <div ng-repeat="spell in spells" class="card">
+                                <div class="card-header">
+                                    <h6>{{spell.name}}</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p>Lorem Ipsum...</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelOne" class="text-center">
                             <h5>1st Level</h5>
@@ -146,10 +156,5 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
             crossorigin="anonymous">
         </script>
-
-        <!-- AngularJS Scripts -->
-        <script src="static/angularJS/app.js"></script>
-        <script src="static/angularJS/controllers/spellController.js"></script>
-        <script src="static/angularJS/components/SpellListing/spellListing.js"></script>
 	</body>
 </html>

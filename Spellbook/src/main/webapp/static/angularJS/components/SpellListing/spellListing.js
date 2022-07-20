@@ -1,9 +1,7 @@
-(function(angular) {
-    'use strict';
-    angular.module("SpellbookApp").component("spellListing", {
-        templateUrl: "spellListing.html",
-        bindings: {
-            spell: '<'
-        }
-    });
-})(window.angular);
+'use strict';
+angular.module("SpellbookApp").component("spellListing", {
+    templateUrl: "/static/angularJS/components/SpellListing/spellListing.html",
+    bindings: {
+        spell: '<'
+    }
+});
