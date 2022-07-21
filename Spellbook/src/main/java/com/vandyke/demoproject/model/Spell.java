@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Spell {
     
+    private Long id;
     private Integer level;
     private String name;
     private String castingTime;

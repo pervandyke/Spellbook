@@ -98,7 +98,7 @@
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
 
-                            <div ng-repeat="spell in spells" class="card mb-1">
+                            <div ng-repeat="spell in sc.spells" class="card mb-1">
                                 <div class="card-header">
                                     <h6 class="m-0">{{spell.name}}</h6>
                                     <div class="d-flex justify-content-center">
