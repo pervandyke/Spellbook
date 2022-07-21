@@ -16,7 +16,7 @@ function SpellServiceFactory($http) {
     return factory;
 
     function fetchAllSpells() {
-        return $http.get(REST_SERVICE_URI).then((response) => response.data);
+        return $http.get(REST_SERVICE_URI);
     }
     
     function createSpell(spell) {

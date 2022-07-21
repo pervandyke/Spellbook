@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vandyke.demoproject.model.ResponseString;
 import com.vandyke.demoproject.model.Spell;
 import com.vandyke.demoproject.service.SpellService;
 
@@ -20,14 +21,14 @@ public class SpellbookController {
     SpellService spellService;
     
     @RequestMapping(value = "/spells", method = RequestMethod.POST)
-    public ResponseEntity<String> addSpell(@RequestBody Spell spell) {
-        System.out.println("Get all spells request.");
+    public ResponseEntity<ResponseString> addSpell(@RequestBody Spell spell) {
+        System.out.println("Add Spell Request.");
         return ResponseEntity.status(HttpStatus.CREATED).body(spellService.createSpell(spell));
     }
     
     @RequestMapping(value = "/spells", method = RequestMethod.GET)
     public ResponseEntity<List<Spell>> getSpells() {
-        System.out.println("Add Spell Request.");
+        System.out.println("Get all spells request.");
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpells());
     }
 }

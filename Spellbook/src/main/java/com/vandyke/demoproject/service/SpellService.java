@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
+import com.vandyke.demoproject.model.ResponseString;
 import com.vandyke.demoproject.model.Spell;
 
 @Service
@@ -27,11 +28,11 @@ public class SpellService {
      * @param spell The provided spell from the front end.
      * @return A confirmation String.
      */
-    public String createSpell(Spell spell) {
+    public ResponseString createSpell(Spell spell) {
         spell.setId(counter.incrementAndGet());
         spells.add(spell);
         System.out.println("Added Spell " + spell.getName());
-        return "Spell " + spell.getName() + " was added with ID " + spell.getId() + ".";
+        return new ResponseString("Spell " + spell.getName() + " was added with ID " + spell.getId() + ".");
     }
 
     public List<Spell> getSpells() {
