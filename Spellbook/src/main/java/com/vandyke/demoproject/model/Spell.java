@@ -1,11 +1,13 @@
 package com.vandyke.demoproject.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 public class Spell {
     
@@ -18,6 +20,7 @@ public class Spell {
     private String damageType;
     private String components;
     private String duration;
+    private String save;
     private String description;
 
 }

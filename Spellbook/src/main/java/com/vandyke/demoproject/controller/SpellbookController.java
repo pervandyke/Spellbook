@@ -21,11 +21,13 @@ public class SpellbookController {
     
     @RequestMapping(value = "/spells", method = RequestMethod.POST)
     public ResponseEntity<String> addSpell(@RequestBody Spell spell) {
+        System.out.println("Get all spells request.");
         return ResponseEntity.status(HttpStatus.CREATED).body(spellService.createSpell(spell));
     }
     
     @RequestMapping(value = "/spells", method = RequestMethod.GET)
     public ResponseEntity<List<Spell>> getSpells() {
+        System.out.println("Add Spell Request.");
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpells());
     }
 }
