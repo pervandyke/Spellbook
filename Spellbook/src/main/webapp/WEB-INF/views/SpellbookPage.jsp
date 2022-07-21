@@ -90,7 +90,7 @@
                             <label class="form-label">Description</label>
                             <textarea ng-model="sc.newSpell.description" class="form-control" rows="4" placeholder="Spell Description"></textarea>
                             
-                            <button class="btn btn-primary mt-2" ng-click="sc.createSpell()">Add Spell!</button>
+                            <button class="btn btn-primary mt-2" ng-click="sc.createSpell()" ng-disabled="newSpellForm.$invalid">Add Spell!</button>
                         </form>
                     </div>
                     <div id="spellContainer" class="col-md-9">
