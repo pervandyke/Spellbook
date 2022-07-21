@@ -17,12 +17,11 @@ angular.module("SpellbookApp").controller("SpellController", ["SpellService", fu
         SpellService.fetchAllSpells()
             .then(
                 function successCallback(response) {
-                    console.log(response);
                     vm.spells = response.data;
                 },
                 function errorCallback(errorResponse) {
-                    console.log(errorResponse);
                     console.log("Error occured fetching spells.");
+                    console.log(errorResponse);
                 }
             );
     }
@@ -33,8 +32,8 @@ angular.module("SpellbookApp").controller("SpellController", ["SpellService", fu
             .then(
                 fetchAllSpells,
                 function (errResponse) {
-                    console.log(errResponse);
                     console.log("There was an error creating the spell.")
+                    console.log(errResponse);
                 }
             );
     }
