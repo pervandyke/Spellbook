@@ -97,8 +97,8 @@
                         <div id="cantrip" class="text-center">
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
-
-                            <div ng-repeat="spell in sc.spells" class="card mb-1">
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 0}" class="card mb-1">
                                 <div class="card-header">
                                     <h6 class="m-0">{{spell.name}}</h6>
                                     <div class="d-flex justify-content-center">
@@ -119,38 +119,209 @@
                         <div id="levelOne" class="text-center">
                             <h5>1st Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 1}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelTwo" class="text-center">
                             <h5>2nd Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 2}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelThree" class="text-center">
                             <h5>3rd Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 3}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div id="levelFour" class="text-center">
                             <h5>4th Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 4}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelFive" class="text-center">
                             <h5>5th Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 5}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelSix" class="text-center">
                             <h5>6th Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 6}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelSeven" class="text-center">
                             <h5>7th Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 7}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelEight" class="text-center">
                             <h5>8th Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 8}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                         <div id="levelNine" class="text-center">
                             <h5>9th Level</h5>
                             <hr class="m-0 mb-1">
+
+                            <!-- Spell Card -->
+                            <div ng-repeat="spell in sc.spells | filter : {'level' : 9}" class="card mb-1">
+                                <div class="card-header">
+                                    <h6 class="m-0">{{spell.name}}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="ms-2">{{spell.castingTime}}</span>
+                                        <span class="ms-2">{{spell.range}}</span>
+                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                        <span class="ms-2">{{spell.components}}</span>
+                                        <span class="ms-2">{{spell.duration}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{spell.description}}</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
