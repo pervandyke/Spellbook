@@ -99,19 +99,23 @@
                             <hr class="m-0 mb-1">
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 0}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -122,19 +126,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 1}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -145,19 +153,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 2}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -168,19 +180,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 3}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -191,19 +207,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 4}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -214,19 +234,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 5}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -237,19 +261,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 6}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -260,19 +288,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 7}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -283,19 +315,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 8}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -306,19 +342,23 @@
 
                             <!-- Spell Card -->
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 9}" class="card mb-1">
-                                <div class="card-header">
-                                    <h6 class="m-0">{{spell.name}}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <span class="ms-2">{{spell.castingTime}}</span>
-                                        <span class="ms-2">{{spell.range}}</span>
-                                        <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                        <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                        <span class="ms-2">{{spell.components}}</span>
-                                        <span class="ms-2">{{spell.duration}}</span>
+                                <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
+                                    <div class="card-header noLink">
+                                        <h6 class="m-0">{{spell.name}}</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <span class="ms-2">{{spell.castingTime}}</span>
+                                            <span class="ms-2">{{spell.range}}</span>
+                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                            <span class="ms-2">{{spell.components}}</span>
+                                            <span class="ms-2">{{spell.duration}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{spell.description}}</p>
+                                </a>
+                                <div class="collapse" id="spell{{spell.id}}">
+                                    <div class="card-body">
+                                        <p>{{spell.description}}</p>
+                                    </div>
                                 </div>
                             </div>
 

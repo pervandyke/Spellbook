@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("SpellbookApp").controller("SpellController", ["SpellService", function (SpellService){
+angular.module("SpellbookApp").controller("SpellController", ["$scope", "SpellService", function ($scope, SpellService){
     
     const vm = this;
     
@@ -36,6 +36,8 @@ angular.module("SpellbookApp").controller("SpellController", ["SpellService", fu
                     console.log(errResponse);
                 }
             );
+        vm.newSpell = {};
+        $scope.newSpellForm.$setPristine();
     }
 
 }]);
