@@ -3,6 +3,7 @@ package com.vandyke.demoproject.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,19 @@ public class SpellService {
 
     public List<Spell> getSpells() {
         return spells;
+    }
+
+    public ResponseString deleteSpell(Long id) {
+        List<Spell> spellList = spells.stream()
+            .filter((s) -> {
+                if (s.getId() == id) {
+                    return false;
+                }
+                return true;
+            })
+            .collect(Collectors.toList());
+        spells = spellList;
+        return new ResponseString("Spell " + id + " was deleted.");
     }
 
     private static List<Spell> populateExampleSpells() {

@@ -122,12 +122,12 @@
                                                 <span class="ms-2">{{spell.duration}}</span>
                                             </div>
                                         </div>
-                                        <button></button>
                                     </div>
                                 </a>
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>

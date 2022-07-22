@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,5 +31,10 @@ public class SpellbookController {
     public ResponseEntity<List<Spell>> getSpells() {
         System.out.println("Get all spells request.");
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpells());
+    }
+
+    @RequestMapping(value = "/spells/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(spellService.deleteSpell(id));
     }
 }

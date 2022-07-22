@@ -10,7 +10,8 @@ function SpellServiceFactory($http) {
 
     const factory = {
         fetchAllSpells: fetchAllSpells,
-        createSpell: createSpell
+        createSpell: createSpell,
+        deleteSpell: deleteSpell
     };
 
     return factory;
@@ -22,5 +23,9 @@ function SpellServiceFactory($http) {
     function createSpell(spell) {
         return $http.post(REST_SERVICE_URI, spell);
             
+    }
+
+    function deleteSpell(id) {
+        return $http.delete(REST_SERVICE_URI + id);
     }
 }

@@ -11,6 +11,7 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "SpellSe
     fetchAllSpells();
 
     vm.createSpell = createSpell;
+    vm.deleteSpell = deleteSpell;
 
     function fetchAllSpells() {
         console.log("Fetching all Spells");
@@ -38,6 +39,18 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "SpellSe
             );
         vm.newSpell = {};
         $scope.newSpellForm.$setPristine();
+    }
+
+    function deleteSpell(id) {
+        console.log("Deleting spell " + id)
+        SpellService.deleteSpell(id)
+            .then(
+                fetchAllSpells,
+                function (errResponse) {
+                    console.log("There was an error deleting the spell.")
+                    console.error(errResponse);
+                }
+            )
     }
 
 }]);
