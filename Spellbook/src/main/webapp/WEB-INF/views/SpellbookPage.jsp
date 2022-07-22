@@ -11,6 +11,7 @@
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <!-- Custom Styles -->
         <link 
             href="/static/css/SpellbookStyles.css"
@@ -21,6 +22,7 @@
         <script src="static/angularJS/app.js"></script>
         <script src="static/angularJS/services/spellService.js"></script>
         <script src="static/angularJS/controllers/spellController.js"></script>
+        <script src="static/angularJS/controllers/spellContainerController.js"></script>
 	</head>
 	
 	<body>
@@ -93,7 +95,15 @@
                             <button class="btn btn-primary mt-2" ng-click="sc.createSpell()" ng-disabled="newSpellForm.$invalid">Add Spell!</button>
                         </form>
                     </div>
-                    <div id="spellContainer" class="col-md-9">
+                    <div id="spellContainer" ng-controller="SpellContainerController as cc" class="col-md-9">
+
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-center">
+                                <h4>Spells</h4>
+                                <button class="btn" ng-click="cc.toggleEdit()"><i class="bi bi-pencil"></i></button>
+                            </div>
+                        </div>
+
                         <div id="cantrip" class="text-center">
                             <h5>Cantrip</h5>
                             <hr class="m-0 mb-1">
@@ -101,15 +111,18 @@
                             <div ng-repeat="spell in sc.spells | filter : {'level' : 0}" class="card mb-1">
                                 <a data-bs-toggle="collapse" href="#spell{{spell.id}}">
                                     <div class="card-header noLink">
-                                        <h6 class="m-0">{{spell.name}}</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <span class="ms-2">{{spell.castingTime}}</span>
-                                            <span class="ms-2">{{spell.range}}</span>
-                                            <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
-                                            <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
-                                            <span class="ms-2">{{spell.components}}</span>
-                                            <span class="ms-2">{{spell.duration}}</span>
+                                        <div>
+                                            <h6 class="m-0">{{spell.name}}</h6>
+                                            <div class="d-flex justify-content-center">
+                                                <span class="ms-2">{{spell.castingTime}}</span>
+                                                <span class="ms-2">{{spell.range}}</span>
+                                                <span ng-if="spell.save" class="ms-2">{{spell.save}}</span>
+                                                <span ng-if="spell.damageAmount" class="ms-2">{{spell.damageAmount + " " + spell.damageType}}</span>
+                                                <span class="ms-2">{{spell.components}}</span>
+                                                <span class="ms-2">{{spell.duration}}</span>
+                                            </div>
                                         </div>
+                                        <button></button>
                                     </div>
                                 </a>
                                 <div class="collapse" id="spell{{spell.id}}">
