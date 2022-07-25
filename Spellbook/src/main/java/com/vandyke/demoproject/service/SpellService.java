@@ -24,7 +24,8 @@ public class SpellService {
     }
 
     /**
-     * Will eventually save the spell to a DB, and return that entity.
+     * Will eventually save the spell to a mySQL DB.
+     * Current implementation temporary.
      * 
      * @param spell The provided spell from the front end.
      * @return A confirmation String.
@@ -36,21 +37,52 @@ public class SpellService {
         return new ResponseString("Spell " + spell.getName() + " was added with ID " + spell.getId() + ".");
     }
 
+    /**
+     * Get all spells in the DB.
+     * Current implementation temporary.
+     * 
+     * @return A list of all spells in the DB.
+     */
     public List<Spell> getSpells() {
         return spells;
     }
+    
+    /**
+     * Get all spells belonging to a given user id.
+     * Current implementation temporary.
+     * 
+     * @return A list of all spells belonging to the given user.
+     */
+    public List<Spell> getUserSpells(Long userId) {
+        List<Spell> userSpells = spells.stream()
+            .filter((s) -> {
+                if (s.getUserId() == userId) {
+                    return true;
+                }
+                return false;
+            })
+            .collect(Collectors.toList());
+        return userSpells;
+    }
 
-    public ResponseString deleteSpell(Long id) {
+    /**
+     * Delete a given spell.
+     * Current implementation temporary.
+     * 
+     * @param spellId The id of the spell to be deleted.
+     * @return A confirmation String.
+     */
+    public ResponseString deleteSpell(Long spellId) {
         List<Spell> spellList = spells.stream()
             .filter((s) -> {
-                if (s.getId() == id) {
+                if (s.getId() == spellId) {
                     return false;
                 }
                 return true;
             })
             .collect(Collectors.toList());
         spells = spellList;
-        return new ResponseString("Spell " + id + " was deleted.");
+        return new ResponseString("Spell " + spellId + " was deleted.");
     }
 
     private static List<Spell> populateExampleSpells() {

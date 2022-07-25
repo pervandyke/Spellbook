@@ -98,8 +98,8 @@
                     <div id="spellContainer" ng-controller="SpellContainerController as cc" class="col-md-9">
 
                         <div class="d-flex flex-column">
-                            <div class="d-flex justify-content-center">
-                                <h4>Spells</h4>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <h4 class="m-0">Spells<span ng-if="cc.editing"> (Editing)</span></h4>
                                 <button class="btn" ng-click="cc.toggleEdit()"><i class="bi bi-pencil"></i></button>
                             </div>
                         </div>
@@ -127,7 +127,10 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
-                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
+                                        <div ng-if="cc.editing" class="d-flex justify-content-center">
+                                            <button ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
+                                            <button ng-click="sc.editSpell(spell.id)" class="btn"><i class="bi bi-pencil"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -155,6 +158,10 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <div ng-if="cc.editing" class="d-flex">
+                                            <button ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
+                                            <button ng-click="sc.editSpell(spell.id)" class="btn"><i class="bi bi-pencil"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -182,6 +189,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -209,6 +217,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -236,6 +245,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +273,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -290,6 +301,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -317,6 +329,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -344,6 +357,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -371,6 +385,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
+                                        <button ng-if="cc.editing" ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                 </div>
                             </div>

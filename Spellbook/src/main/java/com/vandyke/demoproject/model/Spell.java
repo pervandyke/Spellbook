@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class Spell {
     
     private Long id;
+    private Long userId;
     private Integer level;
     private String name;
     private String castingTime;
