@@ -33,7 +33,7 @@ public class SpellbookController {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpells());
     }
 
-    @RequestMapping(value = "/user/{userId}/spells")
+    /*@RequestMapping(value = "/user/{userId}/spells")
     public ResponseEntity<List<Spell>> getUserSpells(@RequestBody Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getUserSpells(userId));
     }
@@ -41,5 +41,5 @@ public class SpellbookController {
     @RequestMapping(value = "/spells/{spellId}", method = RequestMethod.DELETE)
     public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.deleteSpell(spellId));
-    }
+    }*/
 }

@@ -5,23 +5,21 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.vandyke.demoproject.dao.SpellDao;
 import com.vandyke.demoproject.model.ResponseString;
 import com.vandyke.demoproject.model.Spell;
 
 @Service
 public class SpellService {
-    
-    /*
-     * Temporary persistence.
-    */
-    private static final AtomicLong counter = new AtomicLong();
-    private static List<Spell> spells;
 
-    static {
-        spells = populateExampleSpells();
-    }
+    @Autowired
+    SpellDao spellDao;
 
     /**
      * Will eventually save the spell to a mySQL DB.
@@ -30,11 +28,11 @@ public class SpellService {
      * @param spell The provided spell from the front end.
      * @return A confirmation String.
      */
+    @Transactional
     public ResponseString createSpell(Spell spell) {
-        spell.setId(counter.incrementAndGet());
-        spells.add(spell);
-        System.out.println("Added Spell " + spell.getName());
-        return new ResponseString("Spell " + spell.getName() + " was added with ID " + spell.getId() + ".");
+
+        spellDao.createSpell(spell);
+        return new ResponseString("Spell " + spell.getName() + " was saved.");
     }
 
     /**
@@ -44,7 +42,7 @@ public class SpellService {
      * @return A list of all spells in the DB.
      */
     public List<Spell> getSpells() {
-        return spells;
+        return spellDao.findAllSpells();
     }
     
     /**
@@ -53,7 +51,7 @@ public class SpellService {
      * 
      * @return A list of all spells belonging to the given user.
      */
-    public List<Spell> getUserSpells(Long userId) {
+    /*public List<Spell> getUserSpells(Long userId) {
         List<Spell> userSpells = spells.stream()
             .filter((s) -> {
                 if (s.getUserId() == userId) {
@@ -63,7 +61,7 @@ public class SpellService {
             })
             .collect(Collectors.toList());
         return userSpells;
-    }
+    }*/
 
     /**
      * Delete a given spell.
@@ -72,7 +70,7 @@ public class SpellService {
      * @param spellId The id of the spell to be deleted.
      * @return A confirmation String.
      */
-    public ResponseString deleteSpell(Long spellId) {
+    /*public ResponseString deleteSpell(Long spellId) {
         List<Spell> spellList = spells.stream()
             .filter((s) -> {
                 if (s.getId() == spellId) {
@@ -83,9 +81,9 @@ public class SpellService {
             .collect(Collectors.toList());
         spells = spellList;
         return new ResponseString("Spell " + spellId + " was deleted.");
-    }
+    }*/
 
-    private static List<Spell> populateExampleSpells() {
+    /*private static List<Spell> populateExampleSpells() {
         List<Spell> demoSpells = new ArrayList<Spell>();
         Spell spell1 = Spell.builder()
             .id(counter.incrementAndGet())
@@ -115,6 +113,6 @@ public class SpellService {
         demoSpells.add(spell2);
 
         return demoSpells;
-    }
+    }*/
 
 }
