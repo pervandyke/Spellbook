@@ -1,12 +1,7 @@
 package com.vandyke.demoproject.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +23,6 @@ public class SpellService {
      * @param spell The provided spell from the front end.
      * @return A confirmation String.
      */
-    @Transactional
     public ResponseString createSpell(Spell spell) {
 
         spellDao.createSpell(spell);
@@ -42,7 +36,7 @@ public class SpellService {
      * @return A list of all spells in the DB.
      */
     public List<Spell> getSpells() {
-        return spellDao.findAllSpells();
+        return spellDao.findAllSpellsWithHQL();
     }
     
     /**
@@ -70,18 +64,10 @@ public class SpellService {
      * @param spellId The id of the spell to be deleted.
      * @return A confirmation String.
      */
-    /*public ResponseString deleteSpell(Long spellId) {
-        List<Spell> spellList = spells.stream()
-            .filter((s) -> {
-                if (s.getId() == spellId) {
-                    return false;
-                }
-                return true;
-            })
-            .collect(Collectors.toList());
-        spells = spellList;
+    public ResponseString deleteSpell(Long spellId) {
+        spellDao.deleteSpell(spellId);
         return new ResponseString("Spell " + spellId + " was deleted.");
-    }*/
+    }
 
     /*private static List<Spell> populateExampleSpells() {
         List<Spell> demoSpells = new ArrayList<Spell>();

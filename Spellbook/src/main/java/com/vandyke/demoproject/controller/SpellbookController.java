@@ -36,10 +36,10 @@ public class SpellbookController {
     /*@RequestMapping(value = "/user/{userId}/spells")
     public ResponseEntity<List<Spell>> getUserSpells(@RequestBody Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getUserSpells(userId));
-    }
+    }*/
 
     @RequestMapping(value = "/spells/{spellId}", method = RequestMethod.DELETE)
     public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.deleteSpell(spellId));
-    }*/
+    }
 }
