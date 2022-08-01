@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.vandyke.demoproject.dao.SpellDao;
 import com.vandyke.demoproject.model.ResponseString;
@@ -24,7 +23,6 @@ public class SpellService {
      * @return A confirmation String.
      */
     public ResponseString createSpell(Spell spell) {
-
         spellDao.createSpell(spell);
         return new ResponseString("Spell " + spell.getName() + " was saved.");
     }
@@ -36,7 +34,7 @@ public class SpellService {
      * @return A list of all spells in the DB.
      */
     public List<Spell> getSpells() {
-        return spellDao.findAllSpellsWithHQL();
+        return spellDao.findAllSpells();
     }
     
     /**
@@ -45,17 +43,9 @@ public class SpellService {
      * 
      * @return A list of all spells belonging to the given user.
      */
-    /*public List<Spell> getUserSpells(Long userId) {
-        List<Spell> userSpells = spells.stream()
-            .filter((s) -> {
-                if (s.getUserId() == userId) {
-                    return true;
-                }
-                return false;
-            })
-            .collect(Collectors.toList());
-        return userSpells;
-    }*/
+    public List<Spell> getUserSpells(Long userId) {
+        return null;
+    }
 
     /**
      * Delete a given spell.
@@ -72,7 +62,6 @@ public class SpellService {
     /*private static List<Spell> populateExampleSpells() {
         List<Spell> demoSpells = new ArrayList<Spell>();
         Spell spell1 = Spell.builder()
-            .id(counter.incrementAndGet())
             .name("Fire Bolt")
             .level(0)
             .castingTime("1 Action")
@@ -85,7 +74,6 @@ public class SpellService {
             .build();
         demoSpells.add(spell1);
         Spell spell2 = Spell.builder()
-            .id(counter.incrementAndGet())
             .name("Ray of Frost")
             .level(0)
             .castingTime("1 Action")

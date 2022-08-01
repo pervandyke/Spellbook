@@ -46,6 +46,7 @@
         </nav>
         <div class="container-fluid ps-5 pe-5">
             <h3 class="text-center mb-5 mt-3">${name}'s Spellbook</h3>
+            <h4 id="userId">${userId}</h4>
             
             <div ng-app="SpellbookApp" ng-controller="SpellController as sc" class="w-100">
                 <div class="d-flex row">
@@ -158,7 +159,7 @@
                                 <div class="collapse" id="spell{{spell.id}}">
                                     <div class="card-body">
                                         <p>{{spell.description}}</p>
-                                        <div ng-if="cc.editing" class="d-flex">
+                                        <div ng-if="cc.editing" class="d-flex justify-content-center">
                                             <button ng-click="sc.deleteSpell(spell.id)" class="btn"><i class="bi bi-x-lg"></i></button>
                                             <button ng-click="sc.editSpell(spell.id)" class="btn"><i class="bi bi-pencil"></i></button>
                                         </div>
