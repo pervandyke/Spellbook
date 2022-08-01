@@ -1,56 +1,78 @@
 'use strict';
 
-angular.module("SpellbookApp").controller("SpellController", ["$scope", "SpellService", function ($scope, SpellService){
+angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", "SpellService", function ($scope, $log, SpellService){
     
     const vm = this;
+    const newSpellProto = {
+        userId: Number(document.getElementById("userId").innerText)
+    }
     
     vm.spells = [];
     vm.newSpell = {};
 
+    
+
     // Initialize the spell list
     fetchAllSpells();
+    // Set id for new spell
+    vm.newSpell = newSpellProto
 
     vm.createSpell = createSpell;
     vm.deleteSpell = deleteSpell;
+    vm.editSpell = editSpell;
 
     function fetchAllSpells() {
-        console.log("Fetching all Spells");
         SpellService.fetchAllSpells()
             .then(
                 function successCallback(response) {
                     vm.spells = response.data;
                 },
                 function errorCallback(errorResponse) {
-                    console.log("Error occured fetching spells.");
-                    console.log(errorResponse);
+                    $log.error("Error occured fetching spells.");
+                    $log.error(errorResponse);
                 }
             );
     }
 
+    function fetchSpellById(id) {
+        return SpellService.fetchSpellById(id)
+        .then(
+            function successCallback(response) {
+                return response.data;
+            },
+            function errorCallback(errResponse) {
+                $log.error("There was an error retrieving the spell.")
+                $log.error(errResponse);
+            }
+        )
+    }
+
     function createSpell() {
-        console.log("Creating Spell " + vm.newSpell.name);
         SpellService.createSpell(vm.newSpell)
             .then(
                 fetchAllSpells,
                 function (errResponse) {
-                    console.log("There was an error creating the spell.")
-                    console.log(errResponse);
+                    $log.error("There was an error creating the spell.")
+                    $log.error(errResponse);
                 }
             );
-        vm.newSpell = {};
+        vm.newSpell = newSpellProto;
         $scope.newSpellForm.$setPristine();
     }
 
     function deleteSpell(id) {
-        console.log("Deleting spell " + id)
         SpellService.deleteSpell(id)
             .then(
                 fetchAllSpells,
                 function (errResponse) {
-                    console.log("There was an error deleting the spell.")
-                    console.error(errResponse);
+                    $log.error("There was an error deleting the spell.")
+                    $log.error(errResponse);
                 }
             )
     }
+
+    function editSpell(spell) {
+        vm.newSpell = angular.copy(spell);
+    } 
 
 }]);

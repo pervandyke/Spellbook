@@ -2,6 +2,7 @@ package com.vandyke.demoproject.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vandyke.demoproject.exceptions.SpellNotFoundException;
 import com.vandyke.demoproject.model.Spell;
 
 
@@ -30,6 +32,22 @@ public class SpellDao {
         session.saveOrUpdate(spell);
         session.close();
         return spell;
+    }
+
+    @Transactional(readOnly = true)
+    public Spell findSpellById(Long id) throws SpellNotFoundException {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("FROM Spell WHERE id = :spellId");
+        query.setParameter("spellId", id);
+
+        try {
+            return (Spell) query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new SpellNotFoundException("Spell with id " + id + " not found;");
+        } finally {
+            session.close();
+        }
+
     }
 
     @Transactional(readOnly = true)

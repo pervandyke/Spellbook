@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vandyke.demoproject.dao.SpellDao;
+import com.vandyke.demoproject.exceptions.SpellNotFoundException;
 import com.vandyke.demoproject.model.ResponseString;
 import com.vandyke.demoproject.model.Spell;
 
@@ -25,6 +26,10 @@ public class SpellService {
     public ResponseString createSpell(Spell spell) {
         spellDao.createSpell(spell);
         return new ResponseString("Spell " + spell.getName() + " was saved.");
+    }
+
+    public Spell getSpellById(Long Id) throws SpellNotFoundException {
+        return spellDao.findSpellById(Id);
     }
 
     /**

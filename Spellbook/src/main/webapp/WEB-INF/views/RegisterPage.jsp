@@ -37,7 +37,7 @@
         <div class="container-lg">
             <div class="d-flex w-100 justify-content-center">
             <div class="card mt-3">
-                <h3 class="card-header">Login</h3>
+                <h3 class="card-header">Register</h3>
                 <div class="card-body p-4">
                     <form action="/register" method="POST">
 	                    <label>Username</label>
