@@ -1,6 +1,7 @@
 package com.vandyke.demoproject.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Spell {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "userId")
     private User user;
 
@@ -39,6 +40,8 @@ public class Spell {
     private String components;
     private String duration;
     private String save;
+
+    @Column(name = "description", length = 600)
     private String description;
 
 }

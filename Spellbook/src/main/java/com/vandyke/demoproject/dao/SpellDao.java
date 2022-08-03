@@ -27,11 +27,46 @@ public class SpellDao {
     SessionFactory sessionFactory;
 
     @Transactional
-    public Spell createSpell(Spell spell) {
+    public String createSpell(Spell spell) {
         Session session = sessionFactory.openSession();
-        session.saveOrUpdate(spell);
+        session.save(spell);
         session.close();
-        return spell;
+        return "Spell " + spell.getName() + " was created.";
+    }
+
+    public String editSpell(Spell spell) {
+        Transaction tx = null;
+        Session session = sessionFactory.openSession();
+
+        String response = "";
+
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("UPDATE Spell SET level= :level, name= :name, castingtime= :castingTime, range= :range, damageAmount= :damageAmount, damageType= :damageType, components= :components, duration= :duration, save= :save, description= :description WHERE id = :spellId");
+            query.setParameter("spellId", spell.getId());
+            query.setParameter("level", spell.getLevel());
+            query.setParameter("name", spell.getName());
+            query.setParameter("castingTime", spell.getCastingTime());
+            query.setParameter("range", spell.getRange());
+            query.setParameter("damageAmount", spell.getDamageAmount());
+            query.setParameter("damageType", spell.getDamageType());
+            query.setParameter("components", spell.getComponents());
+            query.setParameter("duration", spell.getDuration());
+            query.setParameter("save", spell.getSave());
+            query.setParameter("description", spell.getDescription());
+            query.executeUpdate();
+            tx.commit();
+            response = "Spell " + spell.getName() + " was updated.";
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            response = "Error occured while trying to edit spell " + spell.getId() + ".";
+        } finally {
+            session.close();
+        }
+        return response;
     }
 
     @Transactional(readOnly = true)
@@ -74,24 +109,30 @@ public class SpellDao {
         return results;
     }
 
-    public void deleteSpell(Long id) {
+    public String deleteSpell(Long id) {
         Transaction tx = null;
         Session session = sessionFactory.openSession();
+
+        String response = "";
+
         try {
             tx = session.beginTransaction();
             Query query = session.createQuery("DELETE FROM Spell WHERE id = :spellId");
             query.setParameter("spellId", id);
             query.executeUpdate();
             tx.commit();
+            response = "Spell " + id + " successfully deleted.";
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
+            response = "Error occured while trying to delete spell " + id + ".";
         } finally {
             session.close();
         }
-    }   
+        return response;
+    }
 
     /*public void updateSpell(Spell spell) {
         Session session = sessionFactory.openSession();

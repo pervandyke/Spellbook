@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vandyke.demoproject.exceptions.SpellNotFoundException;
+import com.vandyke.demoproject.exceptions.UserNotFoundException;
+import com.vandyke.demoproject.frontEndObjects.SpellData;
 import com.vandyke.demoproject.model.ResponseString;
-import com.vandyke.demoproject.model.Spell;
 import com.vandyke.demoproject.service.SpellService;
 
 @RestController
@@ -27,19 +28,22 @@ public class SpellbookController {
     // Endpoints
     
     @RequestMapping(value = "/spells", method = RequestMethod.POST)
-    public ResponseEntity<ResponseString> addSpell(@RequestBody Spell spell) {
-        System.out.println("Add Spell Request.");
+    public ResponseEntity<ResponseString> createSpell(@RequestBody SpellData spell) throws UserNotFoundException {
         return ResponseEntity.status(HttpStatus.CREATED).body(spellService.createSpell(spell));
+    }
+
+    @RequestMapping(value = "/spells/{spellId}", method = RequestMethod.PUT)
+    public ResponseEntity<ResponseString> editSpell(@RequestBody SpellData spell) throws UserNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(spellService.editSpell(spell));
     }
     
     @RequestMapping(value = "/spells", method = RequestMethod.GET)
-    public ResponseEntity<List<Spell>> getSpells() {
-        System.out.println("Get all spells request.");
+    public ResponseEntity<List<SpellData>> getSpells() {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpells());
     }
 
     @RequestMapping(value = "/spells/{spellId}", method = RequestMethod.GET)
-    public ResponseEntity<Spell> getSpellById(@PathVariable Long spellId) throws SpellNotFoundException {
+    public ResponseEntity<SpellData> getSpellById(@PathVariable Long spellId) throws SpellNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpellById(spellId));
     }
 
@@ -57,7 +61,13 @@ public class SpellbookController {
 
     @ExceptionHandler(SpellNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> SpellNotFoundException(Throwable err) {
-        return new ResponseEntity<>(err.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Throwable> SpellNotFoundException(Throwable err) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Throwable> UserNotFoundExeption(Throwable err) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
 }

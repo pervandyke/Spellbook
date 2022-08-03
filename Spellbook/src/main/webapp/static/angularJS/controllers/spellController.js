@@ -3,23 +3,21 @@
 angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", "SpellService", function ($scope, $log, SpellService){
     
     const vm = this;
-    const newSpellProto = {
-        userId: Number(document.getElementById("userId").innerText)
-    }
+    const newSpellProto = {}
     
+    vm.editing = false;
     vm.spells = [];
     vm.newSpell = {};
 
-    
-
     // Initialize the spell list
     fetchAllSpells();
-    // Set id for new spell
-    vm.newSpell = newSpellProto
+    // Set userId for new spell
+    vm.newSpell = angular.copy(newSpellProto);
 
     vm.createSpell = createSpell;
     vm.deleteSpell = deleteSpell;
     vm.editSpell = editSpell;
+    vm.toggleEdit = toggleEdit;
 
     function fetchAllSpells() {
         SpellService.fetchAllSpells()
@@ -48,7 +46,22 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
     }
 
     function createSpell() {
-        SpellService.createSpell(vm.newSpell)
+
+        vm.newSpell.userId = Number(document.getElementById("userId").innerText);
+
+        if (vm.newSpell.id != null) {
+            // edit extant spell
+            SpellService.editSpell(vm.newSpell)
+                .then(
+                    fetchAllSpells,
+                    function (errResponse) {
+                        $log.error("There was an error editing the spell.");
+                        $log.error(errResponse);
+                    }
+                );
+        } else {
+            // create new spell
+            SpellService.createSpell(vm.newSpell)
             .then(
                 fetchAllSpells,
                 function (errResponse) {
@@ -56,7 +69,9 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
                     $log.error(errResponse);
                 }
             );
-        vm.newSpell = newSpellProto;
+        }
+
+        vm.newSpell = angular.copy(newSpellProto);
         $scope.newSpellForm.$setPristine();
     }
 
@@ -68,11 +83,19 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
                     $log.error("There was an error deleting the spell.")
                     $log.error(errResponse);
                 }
-            )
+            );
     }
 
     function editSpell(spell) {
         vm.newSpell = angular.copy(spell);
-    } 
+    }
+
+    function toggleEdit() {
+        if(vm.editing) {
+            vm.editing = false;
+        } else {
+            vm.editing = true;
+        }
+    }
 
 }]);
