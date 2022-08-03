@@ -34,11 +34,17 @@ public class LoginController {
         
         try {
             user = userDao.findUserByUsername(login.getUsername());
-            model.addAttribute("name", login.getUsername());
-            model.addAttribute("userId", user.getId());
-            return "SpellbookPage";
+            if (user.getPassword().equals(login.getPassword())) {
+                model.addAttribute("name", login.getUsername());
+                model.addAttribute("userId", user.getId());
+                return "SpellbookPage";
+            } else {
+                model.addAttribute("error", "Password Incorrect");
+                return "LoginPage";
+            }
+            
         } catch (UserNotFoundException e) {
-            model.addAttribute("error", "Try Again");
+            model.addAttribute("error", "Username not found");
             return "LoginPage";
         }
     }
