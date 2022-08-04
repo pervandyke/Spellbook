@@ -29,7 +29,7 @@ public class Spell {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "userId")
-    private User user;
+    public User user;
 
     private Integer level;
     private String name;

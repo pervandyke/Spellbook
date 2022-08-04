@@ -17,6 +17,7 @@ import com.vandyke.demoproject.exceptions.SpellNotFoundException;
 import com.vandyke.demoproject.exceptions.UserNotFoundException;
 import com.vandyke.demoproject.frontEndObjects.SpellData;
 import com.vandyke.demoproject.model.ResponseString;
+import com.vandyke.demoproject.model.Spell;
 import com.vandyke.demoproject.service.SpellService;
 
 @RestController
@@ -48,12 +49,12 @@ public class SpellbookController {
     }
 
     @RequestMapping(value = "/user/{userId}/spells", method = RequestMethod.GET)
-    public ResponseEntity<List<SpellData>> getUsersSpells(@PathVariable Long userId) throws SpellNotFoundException {
+    public ResponseEntity<List<SpellData>> getUsersSpells(@PathVariable Long userId) throws SpellNotFoundException, UserNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getUserSpells(userId));
     }
 
     @RequestMapping(value = "/spells/{spellId}", method = RequestMethod.DELETE)
-    public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) {
+    public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) throws UserNotFoundException, SpellNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.deleteSpell(spellId));
     }
 

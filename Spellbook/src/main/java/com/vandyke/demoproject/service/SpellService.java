@@ -67,8 +67,9 @@ public class SpellService {
      * 
      * @return A list of all spells belonging to the given user.
      */
-    public List<SpellData> getUserSpells(Long userId) {
-        List<Spell> spellList = spellDao.findUserSpells(userId);
+    public List<SpellData> getUserSpells(Long userId) throws UserNotFoundException {
+        User user = userDao.findUserById(userId);
+        List<Spell> spellList = spellDao.findUserSpellsWithCriteria(user);
         List<SpellData> spellDataList = spellList.stream().map((spell) -> spellToData(spell)).collect(Collectors.toList());
         return spellDataList;
     }
@@ -80,7 +81,7 @@ public class SpellService {
      * @param spellId The id of the spell to be deleted.
      * @return A confirmation String.
      */
-    public ResponseString deleteSpell(Long spellId) {
+    public ResponseString deleteSpell(Long spellId) throws UserNotFoundException, SpellNotFoundException {
         spellDao.deleteSpell(spellId);
         return new ResponseString("Spell " + spellId + " was deleted.");
     }
@@ -100,6 +101,7 @@ public class SpellService {
         spell.setCastingTime(data.getCastingTime());
         spell.setRange(data.getRange());
         spell.setDamageAmount(data.getDamageAmount());
+        spell.setDamageType(data.getDamageType());
         spell.setComponents(data.getComponents());
         spell.setDuration(data.getDuration());
         spell.setSave(data.getSave());
@@ -118,6 +120,7 @@ public class SpellService {
         data.setCastingTime(spell.getCastingTime());
         data.setRange(spell.getRange());
         data.setDamageAmount(spell.getDamageAmount());
+        data.setDamageType(spell.getDamageType());
         data.setComponents(spell.getComponents());
         data.setDuration(spell.getDuration());
         data.setSave(spell.getSave());

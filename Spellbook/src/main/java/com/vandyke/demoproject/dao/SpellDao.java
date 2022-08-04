@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vandyke.demoproject.exceptions.SpellNotFoundException;
 import com.vandyke.demoproject.model.Spell;
+import com.vandyke.demoproject.model.User;
 
 
 @Repository
@@ -101,6 +102,20 @@ public class SpellDao {
     }
 
     @Transactional(readOnly = true)
+    public List<Spell> findUserSpellsWithCriteria(User user) {
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+        CriteriaQuery<Spell> criteria = builder.createQuery(Spell.class);
+        Root<Spell> root = criteria.from(Spell.class);
+        
+        criteria.select(root);
+        criteria.where(builder.equal(root.get("user"), user));
+        List<Spell> spells = session.createQuery(criteria).getResultList();
+        return spells;
+    }
+
+    @Transactional(readOnly = true)
     public List<Spell> findAllSpells() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -148,10 +163,5 @@ public class SpellDao {
         }
         return response;
     }
-
-    /*public void updateSpell(Spell spell) {
-        Session session = sessionFactory.openSession();
-        session.createQuery("UPDATE Spell ")
-    } */
 
 }
