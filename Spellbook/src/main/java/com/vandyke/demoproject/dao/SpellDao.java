@@ -86,6 +86,21 @@ public class SpellDao {
     }
 
     @Transactional(readOnly = true)
+    @SuppressWarnings("unchecked")
+    public List<Spell> findUserSpells(Long id) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("FROM Spell WHERE userId = :userId");
+        query.setParameter("userId", id);
+
+        try {
+            return query.getResultList();
+        } finally {
+            session.close();
+        }
+
+    }
+
+    @Transactional(readOnly = true)
     public List<Spell> findAllSpells() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();

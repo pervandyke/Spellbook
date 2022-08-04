@@ -67,8 +67,10 @@ public class SpellService {
      * 
      * @return A list of all spells belonging to the given user.
      */
-    public List<Spell> getUserSpells(Long userId) {
-        return null;
+    public List<SpellData> getUserSpells(Long userId) {
+        List<Spell> spellList = spellDao.findUserSpells(userId);
+        List<SpellData> spellDataList = spellList.stream().map((spell) -> spellToData(spell)).collect(Collectors.toList());
+        return spellDataList;
     }
 
     /**

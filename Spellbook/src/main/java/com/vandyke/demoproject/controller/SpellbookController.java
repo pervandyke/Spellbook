@@ -47,10 +47,10 @@ public class SpellbookController {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpellById(spellId));
     }
 
-    /*@RequestMapping(value = "/user/{userId}/spells")
-    public ResponseEntity<List<Spell>> getUserSpells(@RequestBody Long userId) {
+    @RequestMapping(value = "/user/{userId}/spells", method = RequestMethod.GET)
+    public ResponseEntity<List<SpellData>> getUsersSpells(@PathVariable Long userId) throws SpellNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getUserSpells(userId));
-    }*/
+    }
 
     @RequestMapping(value = "/spells/{spellId}", method = RequestMethod.DELETE)
     public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) {

@@ -8,9 +8,10 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
     vm.editing = false;
     vm.spells = [];
     vm.newSpell = {};
+    vm.userId = Number(document.getElementById("userId").innerText);
 
     // Initialize the spell list
-    fetchAllSpells();
+    fetchUserSpells();
     // Set userId for new spell
     vm.newSpell = angular.copy(newSpellProto);
 
@@ -21,6 +22,19 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
 
     function fetchAllSpells() {
         SpellService.fetchAllSpells()
+            .then(
+                function successCallback(response) {
+                    vm.spells = response.data;
+                },
+                function errorCallback(errorResponse) {
+                    $log.error("Error occured fetching spells.");
+                    $log.error(errorResponse);
+                }
+            );
+    }
+
+    function fetchUserSpells() {
+        SpellService.fetchUsersSpells(vm.userId)
             .then(
                 function successCallback(response) {
                     vm.spells = response.data;
@@ -47,13 +61,13 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
 
     function createSpell() {
 
-        vm.newSpell.userId = Number(document.getElementById("userId").innerText);
+        vm.newSpell.userId = angular.copy(vm.userId);
 
         if (vm.newSpell.id != null) {
             // edit extant spell
             SpellService.editSpell(vm.newSpell)
                 .then(
-                    fetchAllSpells,
+                    fetchUserSpells,
                     function (errResponse) {
                         $log.error("There was an error editing the spell.");
                         $log.error(errResponse);
@@ -63,7 +77,7 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
             // create new spell
             SpellService.createSpell(vm.newSpell)
             .then(
-                fetchAllSpells,
+                fetchUserSpells,
                 function (errResponse) {
                     $log.error("There was an error creating the spell.")
                     $log.error(errResponse);
@@ -78,7 +92,7 @@ angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", 
     function deleteSpell(id) {
         SpellService.deleteSpell(id)
             .then(
-                fetchAllSpells,
+                fetchUserSpells,
                 function (errResponse) {
                     $log.error("There was an error deleting the spell.")
                     $log.error(errResponse);
