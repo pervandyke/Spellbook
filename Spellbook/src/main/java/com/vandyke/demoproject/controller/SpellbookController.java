@@ -17,7 +17,6 @@ import com.vandyke.demoproject.exceptions.SpellNotFoundException;
 import com.vandyke.demoproject.exceptions.UserNotFoundException;
 import com.vandyke.demoproject.frontEndObjects.SpellData;
 import com.vandyke.demoproject.model.ResponseString;
-import com.vandyke.demoproject.model.Spell;
 import com.vandyke.demoproject.service.SpellService;
 
 @RestController
