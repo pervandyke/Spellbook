@@ -28,7 +28,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link" href="/">Home</a>
                         <a class="nav-link active" aria-current="page" href="/login-page">Login</a>
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="/register-page">Register</a>
                     </div>
                 </div>
             </div>

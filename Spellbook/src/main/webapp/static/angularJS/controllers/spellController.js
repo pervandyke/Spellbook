@@ -1,56 +1,115 @@
 'use strict';
 
-angular.module("SpellbookApp").controller("SpellController", ["$scope", "SpellService", function ($scope, SpellService){
+angular.module("SpellbookApp").controller("SpellController", ["$scope", "$log", "SpellService", function ($scope, $log, SpellService){
     
     const vm = this;
+    const newSpellProto = {}
     
+    vm.editing = false;
     vm.spells = [];
     vm.newSpell = {};
+    vm.userId = Number(document.getElementById("userId").innerText);
 
     // Initialize the spell list
-    fetchAllSpells();
+    fetchUserSpells();
+    // Set userId for new spell
+    vm.newSpell = angular.copy(newSpellProto);
 
     vm.createSpell = createSpell;
     vm.deleteSpell = deleteSpell;
+    vm.editSpell = editSpell;
+    vm.toggleEdit = toggleEdit;
 
     function fetchAllSpells() {
-        console.log("Fetching all Spells");
         SpellService.fetchAllSpells()
             .then(
                 function successCallback(response) {
                     vm.spells = response.data;
                 },
                 function errorCallback(errorResponse) {
-                    console.log("Error occured fetching spells.");
-                    console.log(errorResponse);
+                    $log.error("Error occured fetching spells.");
+                    $log.error(errorResponse);
                 }
             );
     }
 
-    function createSpell() {
-        console.log("Creating Spell " + vm.newSpell.name);
-        SpellService.createSpell(vm.newSpell)
+    function fetchUserSpells() {
+        SpellService.fetchUsersSpells(vm.userId)
             .then(
-                fetchAllSpells,
-                function (errResponse) {
-                    console.log("There was an error creating the spell.")
-                    console.log(errResponse);
+                function successCallback(response) {
+                    vm.spells = response.data;
+                },
+                function errorCallback(errorResponse) {
+                    $log.error("Error occured fetching spells.");
+                    $log.error(errorResponse);
                 }
             );
-        vm.newSpell = {};
+    }
+
+    function fetchSpellById(id) {
+        return SpellService.fetchSpellById(id)
+        .then(
+            function successCallback(response) {
+                return response.data;
+            },
+            function errorCallback(errResponse) {
+                $log.error("There was an error retrieving the spell.")
+                $log.error(errResponse);
+            }
+        )
+    }
+
+    function createSpell() {
+
+        vm.newSpell.userId = angular.copy(vm.userId);
+
+        if (vm.newSpell.id != null) {
+            // edit extant spell
+            SpellService.editSpell(vm.newSpell)
+                .then(
+                    fetchUserSpells,
+                    function (errResponse) {
+                        $log.error("There was an error editing the spell.");
+                        $log.error(errResponse);
+                    }
+                );
+        } else {
+            // create new spell
+            SpellService.createSpell(vm.newSpell)
+            .then(
+                fetchUserSpells,
+                function (errResponse) {
+                    $log.error("There was an error creating the spell.")
+                    $log.error(errResponse);
+                }
+            );
+        }
+
+        vm.newSpell = angular.copy(newSpellProto);
         $scope.newSpellForm.$setPristine();
     }
 
     function deleteSpell(id) {
-        console.log("Deleting spell " + id)
         SpellService.deleteSpell(id)
             .then(
-                fetchAllSpells,
+                fetchUserSpells,
                 function (errResponse) {
-                    console.log("There was an error deleting the spell.")
-                    console.error(errResponse);
+                    $log.error("There was an error deleting the spell.")
+                    $log.error(errResponse);
                 }
-            )
+            );
+    }
+
+    function editSpell(spell) {
+        vm.newSpell = angular.copy(spell);
+    }
+
+    function toggleEdit() {
+        if(vm.editing) {
+            vm.editing = false;
+        } else {
+            vm.editing = true;
+        }
     }
 
 }]);
