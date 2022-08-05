@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Home</title>
+        <title>Register</title>
         
         <link 
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
@@ -26,9 +26,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="flex-grow: 0;">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                        <a class="nav-link" href="/login-page">Login</a>
-                        <a class="nav-link" href="/register-page">Register</a>
+                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" aria-current="page" href="/login-page">Login</a>
+                        <a class="nav-link active" href="/register-page">Register</a>
                     </div>
                 </div>
             </div>
@@ -36,11 +36,25 @@
         
         <div class="container-lg">
             <div class="d-flex w-100 justify-content-center">
-                <h2>Welcome to the Spellbook app!</h2>
+            <div class="card mt-3">
+                <h3 class="card-header">Register</h3>
+                <div class="card-body p-4">
+                    <form action="/register" method="POST">
+	                    <label>Username</label>
+	                    <input type="text" id="username" name="username" class="form-control" placeholder="username" autofocus="" required/>
+	                    
+	                    <label>Password</label>
+	                    <input type="password" id="password" name="password" class="form-control" placeholder="password" required/>
+	                    
+	                    <input type="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
+	                    <div style="background-color: white; color: red">${error}</div>
+                    </form>
+                </div>
+            </div>
+                
             </div>
         </div>
-        
-        <!-- Bootstrap Script -->
+    
         <script 
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
