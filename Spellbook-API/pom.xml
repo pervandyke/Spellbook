@@ -53,6 +53,15 @@
             <version>2.1.214</version>
         </dependency>
 
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <!-- Logging -->
         <!-- 
         <dependency>                             
