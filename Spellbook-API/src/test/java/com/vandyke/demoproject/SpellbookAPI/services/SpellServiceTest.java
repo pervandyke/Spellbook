@@ -1,56 +1,133 @@
 package com.vandyke.demoproject.SpellbookAPI.services;
 
 import org.testng.annotations.Test;
+
+import com.vandyke.demoproject.SpellbookAPI.frontEndObjects.SpellData;
+import com.vandyke.demoproject.SpellbookAPI.models.Spell;
+import com.vandyke.demoproject.SpellbookAPI.models.User;
+import com.vandyke.demoproject.SpellbookAPI.repositories.SpellRepository;
+import com.vandyke.demoproject.SpellbookAPI.repositories.UserRepository;
+
 import org.testng.annotations.BeforeClass;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterClass;
 
-public class SpellServiceTest {
-  @BeforeClass
-  public void beforeClass() {
-  }
+@Test
+public class SpellServiceTest extends AbstractTestNGSpringContextTests {
 
-  @AfterClass
-  public void afterClass() {
-  }
+    @Mock
+    SpellRepository spellRepo;
+
+    @Mock
+    UserRepository userRepo;
+
+    @InjectMocks
+    SpellService spellService;
+
+    @BeforeClass
+    public void init() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterClass
+    public void afterClass() throws Exception {
+        MockitoAnnotations.openMocks(this).close();
+    }
 
 
-  @Test
-  public void createSpellTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+    @Test
+    public void givenValidData_whenAddSpellButtonClicked_thenSpellShouldBeSaved() {
+        SpellData data = createDummySpellData();
+        Spell spell = createDummySpell();
 
-  @Test
-  public void deleteSpellTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+        when(spellRepo.save(any())).thenReturn(spell);
 
-  @Test
-  public void editSpellTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+    }
 
-  @Test
-  public void getSpellByIdTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+    @Test
+    public void deleteSpellTest() {
+        throw new RuntimeException("Test not implemented");
+    }
 
-  @Test
-  public void getSpellsTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+    @Test
+    public void editSpellTest() {
+        throw new RuntimeException("Test not implemented");
+    }
 
-  @Test
-  public void getUserSpellsTest() {
-    throw new RuntimeException("Test not implemented");
-  }
-  
-  @Test
-  public void dataToSpellTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+    @Test
+    public void getSpellByIdTest() {
+        throw new RuntimeException("Test not implemented");
+    }
 
-  @Test
-  public void spellToDataTest() {
-    throw new RuntimeException("Test not implemented");
-  }
+    @Test
+    public void getSpellsTest() {
+        throw new RuntimeException("Test not implemented");
+    }
+
+    @Test
+    public void getUserSpellsTest() {
+        throw new RuntimeException("Test not implemented");
+    }
+
+    @Test
+    public void dataToSpellTest() {
+        throw new RuntimeException("Test not implemented");
+    }
+
+    @Test
+    public void spellToDataTest() {
+        throw new RuntimeException("Test not implemented");
+    }
+
+    private SpellData createDummySpellData() {
+        SpellData data = new SpellData();
+
+        data.setName("TestSpell");
+        data.setUserId(1l);
+        data.setLevel(2);
+        data.setRange("100ft");
+        data.setCastingTime("1 Action");
+        data.setComponents("V,S");
+        data.setDuration("Instantaneous");
+        data.setDamageType("Fire");
+        data.setDamageAmount("2d8");
+        data.setDescription("This is a test spell.");
+
+        return data;
+    }
+
+    private Spell createDummySpell() {
+        Spell data = new Spell();
+
+        data.setName("TestSpell");
+        data.setId(1l);
+        data.setUser(createDummyUser());
+        data.setLevel(2);
+        data.setRange("100ft");
+        data.setCastingTime("1 Action");
+        data.setComponents("V,S");
+        data.setDuration("Instantaneous");
+        data.setDamageType("Fire");
+        data.setDamageAmount("2d8");
+        data.setDescription("This is a test spell.");
+
+        return data;
+    }
+
+    private User createDummyUser() {
+        User user = new User();
+
+        user.setId(1l);
+        user.setUsername("test");
+        user.setPassword("pass");
+
+        return user;
+    }
 }
