@@ -32,10 +32,10 @@ public class SpellService {
      * @param data The provided spell from the front end.
      * @return A confirmation String.
      */
-    public ResponseString createSpell(SpellData data) throws UserNotFoundException {
+    public Spell createSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
-        return new ResponseString("Spell " + spell.getName() + " was saved.");
+        return spell;
     }
 
     /**
@@ -46,10 +46,10 @@ public class SpellService {
      * @return A confirmation String.
      * @throws UserNotFoundException
      */
-    public ResponseString editSpell(SpellData data) throws UserNotFoundException {
+    public Spell editSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
-        return new ResponseString("Spell " + spell.getName() + " was edited.");
+        return spell;
     }
 
     /**

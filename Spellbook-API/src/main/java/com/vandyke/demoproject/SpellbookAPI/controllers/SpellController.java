@@ -20,6 +20,7 @@ import com.vandyke.demoproject.SpellbookAPI.exeptions.UserNotFoundException;
 import com.vandyke.demoproject.SpellbookAPI.exeptions.SpellNotFoundException;
 import com.vandyke.demoproject.SpellbookAPI.frontEndObjects.SpellData;
 import com.vandyke.demoproject.SpellbookAPI.models.ResponseString;
+import com.vandyke.demoproject.SpellbookAPI.models.Spell;
 import com.vandyke.demoproject.SpellbookAPI.services.SpellService;
 
 @RestController
@@ -33,13 +34,13 @@ public class SpellController {
     // Endpoints
     
     @PostMapping(value = "/spells")
-    public ResponseEntity<ResponseString> createSpell(@RequestBody SpellData spell) throws UserNotFoundException {
+    public ResponseEntity<Spell> createSpell(@RequestBody SpellData spell) throws UserNotFoundException {
         System.out.println("Recieved New Spell");
         return ResponseEntity.status(HttpStatus.CREATED).body(spellService.createSpell(spell));
     }
 
     @PutMapping(value = "/spells/{spellId}")
-    public ResponseEntity<ResponseString> editSpell(@RequestBody SpellData spell) throws UserNotFoundException {
+    public ResponseEntity<Spell> editSpell(@RequestBody SpellData spell) throws UserNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.editSpell(spell));
     }
     
