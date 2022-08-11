@@ -44,15 +44,15 @@ public class SpellController {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.editSpell(spell));
     }
     
-    @GetMapping(value = "/spells")
+    /*@GetMapping(value = "/spells")
     public ResponseEntity<List<SpellData>> getSpells() {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpells());
-    }
+    }*/
 
-    @GetMapping(value = "/spells/{spellId}")
+    /*@GetMapping(value = "/spells/{spellId}")
     public ResponseEntity<SpellData> getSpellById(@PathVariable Long spellId) throws SpellNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.getSpellById(spellId));
-    }
+    }*/
 
     @GetMapping(value = "/user/{userId}/spells")
     public ResponseEntity<List<SpellData>> getUsersSpells(@PathVariable Long userId) throws SpellNotFoundException, UserNotFoundException {
@@ -60,7 +60,7 @@ public class SpellController {
     }
 
     @DeleteMapping(value = "/spells/{spellId}")
-    public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) throws UserNotFoundException, SpellNotFoundException {
+    public ResponseEntity<ResponseString> deleteSpell(@PathVariable Long spellId) throws SpellNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.deleteSpell(spellId));
     }
 

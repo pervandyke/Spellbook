@@ -59,25 +59,25 @@ public class SpellService {
      * @return The SpellData for the requested spell.
      * @throws SpellNotFoundException
      */
-    public SpellData getSpellById(Long id) throws SpellNotFoundException {
+    /*public SpellData getSpellById(Long id) throws SpellNotFoundException {
         Optional<Spell> spell = spellRepo.findById(id);
         if (spell.isPresent()) {
             SpellData spellData = spellToData(spell.get());
             return spellData;
         }
         throw new SpellNotFoundException("Spell with id " + id + " not found.");
-    }
+    }*/
 
     /**
      * Get all spells in the DB.
      * 
      * @return A list of all spells in the DB.
      */
-    public List<SpellData> getSpells() {
+    /*public List<SpellData> getSpells() {
         List<Spell> spellList = spellRepo.findAll();
         List<SpellData> spellDataList = spellList.stream().map((spell) -> spellToData(spell)).collect(Collectors.toList());
         return  spellDataList;
-    }
+    }*/
     
     /**
      * Get all spells belonging to a given user id.
@@ -100,9 +100,12 @@ public class SpellService {
      * @param spellId The id of the spell to be deleted.
      * @return A confirmation String.
      */
-    public ResponseString deleteSpell(Long spellId) throws UserNotFoundException, SpellNotFoundException {
-        spellRepo.deleteById(spellId);
-        return new ResponseString("Spell " + spellId + " was deleted.");
+    public ResponseString deleteSpell(Long spellId) throws SpellNotFoundException {
+        if (spellRepo.existsById(spellId)) {
+            spellRepo.deleteById(spellId);
+            return new ResponseString("Spell " + spellId + " was deleted.");
+        }
+        throw new SpellNotFoundException("Spell " + spellId + " not found.");
     }
 
     private Spell dataToSpell(SpellData data) throws UserNotFoundException {

@@ -2,6 +2,7 @@ package com.vandyke.demoproject.SpellbookAPI.services;
 
 import org.testng.annotations.Test;
 
+import com.vandyke.demoproject.SpellbookAPI.exeptions.SpellNotFoundException;
 import com.vandyke.demoproject.SpellbookAPI.exeptions.UserNotFoundException;
 import com.vandyke.demoproject.SpellbookAPI.frontEndObjects.SpellData;
 import com.vandyke.demoproject.SpellbookAPI.models.Spell;
@@ -13,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,9 +66,32 @@ public class SpellServiceTest extends AbstractTestNGSpringContextTests {
         verify(spellRepo).save(spell);
     }
 
+    @Test(expectedExceptions = {UserNotFoundException.class})
+    public void givenInvalidUserId_whenAddSpellButtonClicked_thenErrorShouldBeThrown() throws UserNotFoundException {
+        SpellData data = createDummySpellData();
+        Spell spell = createDummySpell();
+        Optional<User> user = Optional.empty();
+
+        when(spellRepo.save(any())).thenReturn(spell);
+        when(userRepo.findById(any())).thenReturn(user);
+
+        spellService.createSpell(data);
+    }
+
     @Test
-    public void deleteSpellTest() {
-        throw new RuntimeException("Test not implemented");
+    public void givenValidSpellId_whenDeleteButtonClicked_thenSpellShouldBeDeleted() throws SpellNotFoundException {
+        doNothing().when(spellRepo).deleteById(anyLong());
+        when(spellRepo.existsById(anyLong())).thenReturn(true);
+
+		spellService.deleteSpell(1l);
+        verify(spellRepo).deleteById(anyLong());
+    }
+
+    @Test(expectedExceptions = {SpellNotFoundException.class})
+    public void givenInvalidSpellId_whenDeleteRequestRecieved_thenErrorShouldBeThrown() throws SpellNotFoundException {
+        when(spellRepo.existsById(anyLong())).thenReturn(false);
+        
+        spellService.deleteSpell(1l);
     }
 
     @Test
