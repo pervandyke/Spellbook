@@ -27,12 +27,12 @@ public class SpellService {
     
     
     /**
-     * Save the spell to a DB.
+     * If the spell does not exist save it to the DB. Otherwise edit the existing spell.
      * 
      * @param data The provided spell from the front end.
-     * @return A confirmation String.
+     * @return The saved or updated spell.
      */
-    public Spell createSpell(SpellData data) throws UserNotFoundException {
+    public Spell createOrEditSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
         return spell;
@@ -46,11 +46,11 @@ public class SpellService {
      * @return A confirmation String.
      * @throws UserNotFoundException
      */
-    public Spell editSpell(SpellData data) throws UserNotFoundException {
+    /*public Spell editSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
         return spell;
-    }
+    }*/
 
     /**
      * Gets a single spell by its Id.

@@ -19,6 +19,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
@@ -53,29 +55,29 @@ public class SpellServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void givenValidData_whenAddSpellButtonClicked_thenSpellShouldBeSaved() throws UserNotFoundException {
-        SpellData data = createDummySpellData();
-        Spell spell = createDummySpell();
-        Optional<User> user = createDummyUser();
+        SpellData data = createDummySpellData(1l, 1l);
+        Spell spell = createDummySpell(1l, 1l);
+        Optional<User> user = createDummyUser(1l);
 
         when(spellRepo.save(any())).thenReturn(spell);
         when(userRepo.findById(any())).thenReturn(user);
 
-        Spell returnedSpell = spellService.createSpell(data);
+        Spell returnedSpell = spellService.createOrEditSpell(data);
         assertEquals(returnedSpell, spell);
 
         verify(spellRepo).save(spell);
     }
 
     @Test(expectedExceptions = {UserNotFoundException.class})
-    public void givenInvalidUserId_whenAddSpellButtonClicked_thenErrorShouldBeThrown() throws UserNotFoundException {
-        SpellData data = createDummySpellData();
-        Spell spell = createDummySpell();
+    public void givenInvalidUserId_whenAddSpellButtonClicked_thenExceptionShouldBeThrown() throws UserNotFoundException {
+        SpellData data = createDummySpellData(1l, 1l);
+        Spell spell = createDummySpell(1l, 1l);
         Optional<User> user = Optional.empty();
 
         when(spellRepo.save(any())).thenReturn(spell);
         when(userRepo.findById(any())).thenReturn(user);
 
-        spellService.createSpell(data);
+        spellService.createOrEditSpell(data);
     }
 
     @Test
@@ -88,48 +90,44 @@ public class SpellServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(expectedExceptions = {SpellNotFoundException.class})
-    public void givenInvalidSpellId_whenDeleteRequestRecieved_thenErrorShouldBeThrown() throws SpellNotFoundException {
+    public void givenInvalidSpellId_whenDeleteRequestRecieved_thenExceptionShouldBeThrown() throws SpellNotFoundException {
         when(spellRepo.existsById(anyLong())).thenReturn(false);
-        
+
         spellService.deleteSpell(1l);
     }
 
     @Test
-    public void editSpellTest() {
-        throw new RuntimeException("Test not implemented");
+    public void givenValidUserId_whenFrontEndRequestsUsersSpells_thenListOfSpellsShouldBeReturned() throws UserNotFoundException {
+        List<SpellData> dataList = new ArrayList<SpellData>();
+        List<Spell> spellList = new ArrayList<Spell>();
+
+        dataList.add(createDummySpellData(1l, 1l));
+        dataList.add(createDummySpellData(2l, 1l));
+
+        spellList.add(createDummySpell(1l, 1l));
+        spellList.add(createDummySpell(2l, 1l));
+
+        when(spellRepo.findAllByUser(any())).thenReturn(spellList);
+        when(userRepo.findById(1l)).thenReturn(createDummyUser(1l));
+
+        List<SpellData> returnedData = spellService.getUserSpells(1l);
+
+        Assert.assertEquals(returnedData, dataList);
     }
 
-    @Test
-    public void getSpellByIdTest() {
-        throw new RuntimeException("Test not implemented");
+    @Test(expectedExceptions = {UserNotFoundException.class})
+    public void givenInvalidUserId_whenFrontEndRequestsUsersSpells_thenExceptionShouldBeThrown() throws UserNotFoundException {
+        when(userRepo.findById(anyLong())).thenReturn(Optional.empty());
+
+        spellService.getUserSpells(1l);
     }
 
-    @Test
-    public void getSpellsTest() {
-        throw new RuntimeException("Test not implemented");
-    }
-
-    @Test
-    public void getUserSpellsTest() {
-        throw new RuntimeException("Test not implemented");
-    }
-
-    @Test
-    public void dataToSpellTest() {
-        throw new RuntimeException("Test not implemented");
-    }
-
-    @Test
-    public void spellToDataTest() {
-        throw new RuntimeException("Test not implemented");
-    }
-
-    private SpellData createDummySpellData() {
+    private SpellData createDummySpellData(Long spellId, Long userId) {
         SpellData data = new SpellData();
 
         data.setName("TestSpell");
-        data.setId(1l);
-        data.setUserId(1l);
+        data.setId(spellId);
+        data.setUserId(userId);
         data.setLevel(2);
         data.setRange("100ft");
         data.setCastingTime("1 Action");
@@ -142,12 +140,12 @@ public class SpellServiceTest extends AbstractTestNGSpringContextTests {
         return data;
     }
 
-    private Spell createDummySpell() {
+    private Spell createDummySpell(Long spellId, Long userId) {
         Spell data = new Spell();
 
         data.setName("TestSpell");
-        data.setId(1l);
-        data.setUser(createDummyUser().get());
+        data.setId(spellId);
+        data.setUser(createDummyUser(userId).get());
         data.setLevel(2);
         data.setRange("100ft");
         data.setCastingTime("1 Action");
@@ -160,10 +158,10 @@ public class SpellServiceTest extends AbstractTestNGSpringContextTests {
         return data;
     }
 
-    private Optional<User> createDummyUser() {
+    private Optional<User> createDummyUser(Long userId) {
         User user = new User();
 
-        user.setId(1l);
+        user.setId(userId);
         user.setUsername("test");
         user.setPassword("pass");
 
