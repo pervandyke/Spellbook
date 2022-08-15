@@ -38,14 +38,13 @@
 
                 <div class="collapse navbar-collapse" id="navbarNav" style="flex-grow: 0;">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="/">Logout</a>
-                        
+                        <a id="logoutNav" class="nav-link" href="/">Logout</a>
                     </div>
                 </div>
             </div>
         </nav>
         <div class="container-fluid ps-5 pe-5">
-            <h3 class="text-center mb-5 mt-3">${name}'s Spellbook</h3>
+            <h3 id="userWelcome" class="text-center mb-5 mt-3">${name}'s Spellbook</h3>
             <h4 class="visually-hidden" id="userId">${userId}</h4>
             
             <div ng-app="SpellbookApp" ng-controller="SpellController as sc" class="w-100">

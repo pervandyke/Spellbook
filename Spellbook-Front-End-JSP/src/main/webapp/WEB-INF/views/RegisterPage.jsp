@@ -26,9 +26,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="flex-grow: 0;">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="/">Home</a>
-                        <a class="nav-link" aria-current="page" href="/login-page">Login</a>
-                        <a class="nav-link active" href="/register-page">Register</a>
+                        <a id="homeNav" class="nav-link" href="/">Home</a>
+                        <a id="loginNav" class="nav-link" aria-current="page" href="/login-page">Login</a>
+                        <a id="registerNav" class="nav-link active" href="/register-page">Register</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
 	                    <label>Password</label>
 	                    <input type="password" id="password" name="password" class="form-control" placeholder="password" required/>
 	                    
-	                    <input type="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
+	                    <input id="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
 	                    <div style="background-color: white; color: red">${error}</div>
                     </form>
                 </div>
