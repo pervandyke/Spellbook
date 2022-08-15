@@ -4,12 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
 
-import org.apache.tomcat.jni.Time;
-import org.h2.command.ddl.DropAggregate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -23,10 +20,18 @@ public class FrontEndTests {
     
     WebDriver driver;
 
+    String user;
+    String password = "TestPass";
+
     String BASE_URL = "http://localhost:8080/";
 
-    @BeforeTest
+    @BeforeClass
     public void init() {
+        user = "TestUser" + System.currentTimeMillis();
+    }
+    
+    @BeforeTest
+    public void setUp() {
         //System.setProperty("webdriver.chrome.driver", "C:\\Users\\per.van.dyke\\SeleniumDrivers\\chromedriver.exe");
         
         driver = WebDriverManager.chromedriver().create();
@@ -52,14 +57,12 @@ public class FrontEndTests {
 
         sleep(1000l);
         
-        WebElement username = driver.findElement(By.id("username"));
-        WebElement password = driver.findElement(By.id("password"));
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
         WebElement submit = driver.findElement(By.id("submit"));
 
-        String user = "TestUser" + System.currentTimeMillis();
-
-        username.sendKeys(user);
-        password.sendKeys("TestPass");
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(password);
 
         sleep(1000l);
 
@@ -72,6 +75,43 @@ public class FrontEndTests {
         String pageHeader = driver.findElement(By.id("userWelcome")).getText();
         assertEquals(user+"'s Spellbook", pageHeader);
         sleep(1000l);
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenExistingUsername_whenRegisterButtonClicked_errorMessageDisplayed() {
+        driver.get(BASE_URL);
+
+        WebElement registerNav = driver.findElement(By.id("registerNav"));
+
+        new Actions(driver)
+            .moveToElement(registerNav)
+            .click()
+            .perform();
+
+        sleep(1000l);
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(password);
+
+        sleep(1000l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(1000l);
+
+        String error = driver.findElement(By.id("error")).getText();
+        assertEquals("User Already Exists", error);
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenValidData_whenLoginButtonClicked_userIsLoggedIn() {
+
     }
 
     private void sleep(Long millis) {

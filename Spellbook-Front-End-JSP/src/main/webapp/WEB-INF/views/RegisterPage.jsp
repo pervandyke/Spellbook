@@ -47,7 +47,7 @@
 	                    <input type="password" id="password" name="password" class="form-control" placeholder="password" required/>
 	                    
 	                    <input id="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
-	                    <div style="background-color: white; color: red">${error}</div>
+	                    <div id="error" style="background-color: white; color: red">${error}</div>
                     </form>
                 </div>
             </div>
