@@ -36,7 +36,7 @@ public class FrontEndTests {
 
     @AfterTest
     public void cleanUp() {
-        //driver.quit();
+        driver.quit();
     }
 
     @Test
@@ -71,6 +71,7 @@ public class FrontEndTests {
 
         String pageHeader = driver.findElement(By.id("userWelcome")).getText();
         assertEquals(user+"'s Spellbook", pageHeader);
+        sleep(1000l);
     }
 
     private void sleep(Long millis) {
