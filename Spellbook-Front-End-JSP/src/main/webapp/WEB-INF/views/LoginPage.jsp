@@ -46,8 +46,8 @@
 	                    <label>Password</label>
 	                    <input type="password" id="password" name="password" class="form-control" placeholder="password" required/>
 	                    
-	                    <input type="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
-	                    <div style="background-color: white; color: red">${error}</div>
+	                    <input id="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
+	                    <div id="error" style="background-color: white; color: red">${error}</div>
                     </form>
                 </div>
             </div>

@@ -110,15 +110,107 @@ public class FrontEndTests {
     }
 
     @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
-    public void givenValidData_whenLoginButtonClicked_userIsLoggedIn() {
+    public void givenValidInput_whenLoginButtonClicked_userIsLoggedIn() {
+        driver.get(BASE_URL);
 
+        WebElement loginNav = driver.findElement(By.id("loginNav"));
+
+        new Actions(driver)
+            .moveToElement(loginNav)
+            .click()
+            .perform();
+
+        sleep(1000l);
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(password);
+
+        sleep(1000l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(1000l);
+
+        String pageHeader = driver.findElement(By.id("userWelcome")).getText();
+        assertEquals(user+"'s Spellbook", pageHeader);
+        sleep(1000l);
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenWrongPassword_whenLoginButtonClicked_errorMessageIsDisplayed() {
+        driver.get(BASE_URL);
+
+        WebElement loginNav = driver.findElement(By.id("loginNav"));
+
+        new Actions(driver)
+            .moveToElement(loginNav)
+            .click()
+            .perform();
+
+        sleep(1000l);
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+        passwordField.sendKeys("wrongPassword");
+
+        sleep(1000l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(1000l);
+
+        String error = driver.findElement(By.id("error")).getText();
+        assertEquals("Password Incorrect", error);
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenInvalidUsername_whenLoginButtonClicked_errorMessageIsDisplayed() {
+        driver.get(BASE_URL);
+
+        WebElement loginNav = driver.findElement(By.id("loginNav"));
+
+        new Actions(driver)
+            .moveToElement(loginNav)
+            .click()
+            .perform();
+
+        sleep(1000l);
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys("ImaginaryUser");
+        passwordField.sendKeys(password);
+
+        sleep(1000l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(1000l);
+
+        String error = driver.findElement(By.id("error")).getText();
+        assertEquals("Username not found", error);
     }
 
     private void sleep(Long millis) {
         try {
             Thread.sleep(millis);
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
         }
     }
 }
