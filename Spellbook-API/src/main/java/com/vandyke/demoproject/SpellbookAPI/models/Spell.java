@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.vandyke.demoproject.SpellbookAPI.frontEndObjects.SpellData;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,5 +44,24 @@ public class Spell {
 
     @Column(name = "description", length = 600)
     private String description;
+
+    public SpellData toData() {
+        SpellData data = new SpellData();
+
+        data.setId(this.getId());
+        data.setUserId(this.getUser().getId());
+        data.setLevel(this.getLevel());
+        data.setName(this.getName());
+        data.setCastingTime(this.getCastingTime());
+        data.setRange(this.getRange());
+        data.setDamageAmount(this.getDamageAmount());
+        data.setDamageType(this.getDamageType());
+        data.setComponents(this.getComponents());
+        data.setDuration(this.getDuration());
+        data.setSave(this.getSave());
+        data.setDescription(this.getDescription());
+
+        return data;
+    }
 
 }

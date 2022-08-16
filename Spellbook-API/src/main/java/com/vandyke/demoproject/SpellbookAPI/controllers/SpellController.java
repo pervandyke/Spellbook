@@ -34,13 +34,13 @@ public class SpellController {
     // Endpoints
     
     @PostMapping(value = "/spells")
-    public ResponseEntity<Spell> createSpell(@RequestBody SpellData spell) throws UserNotFoundException {
+    public ResponseEntity<SpellData> createSpell(@RequestBody SpellData spell) throws UserNotFoundException {
         System.out.println("Recieved New Spell");
         return ResponseEntity.status(HttpStatus.CREATED).body(spellService.createOrEditSpell(spell));
     }
 
     @PutMapping(value = "/spells/{spellId}")
-    public ResponseEntity<Spell> editSpell(@RequestBody SpellData spell) throws UserNotFoundException {
+    public ResponseEntity<SpellData> editSpell(@RequestBody SpellData spell) throws UserNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(spellService.createOrEditSpell(spell));
     }
     

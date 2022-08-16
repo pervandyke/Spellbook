@@ -62,7 +62,8 @@ public class SpellServiceTest extends AbstractTestNGSpringContextTests {
         when(spellRepo.save(any())).thenReturn(spell);
         when(userRepo.findById(any())).thenReturn(user);
 
-        Spell returnedSpell = spellService.createOrEditSpell(data);
+        SpellData returnedSpellData = spellService.createOrEditSpell(data);
+        Spell returnedSpell = spellService.dataToSpell(returnedSpellData);
         assertEquals(returnedSpell, spell);
 
         verify(spellRepo).save(spell);

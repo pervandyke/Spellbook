@@ -53,46 +53,46 @@
                         <h5>Add a Spell!</h5>
                         <form id="addSpellForm" name="newSpellForm">
                             <label class="form-label">Name:</label>
-                            <input ng-model="sc.newSpell.name" type="text" class="form-control" placeholder="Spell Name" required/>
+                            <input id="name" ng-model="sc.newSpell.name" type="text" class="form-control" placeholder="Spell Name" required/>
 
                             <label class="form-label">Level:</label>
-                            <input ng-model="sc.newSpell.level" type="number" min="0" max="9" class="form-control" placeholder="Spell Level (0-9)" required/>
+                            <input id="level" ng-model="sc.newSpell.level" type="number" min="0" max="9" class="form-control" placeholder="Spell Level (0-9)" required/>
 
                             <label class="form-label">Damaging Spell?</label>
-                            <input type="checkbox" class="form-check" ng-model="Damaging"/>
+                            <input id="damageToggle" type="checkbox" class="form-check" ng-model="Damaging"/>
 
                             <div ng-if="Damaging" class="d-flex flex-column">
                                 <label class="form-label">Damage Type:</label>
-                                <input ng-model="sc.newSpell.damageType" type="text" class="form-control" placeholder="Damage Type"/>
+                                <input id="damageType" ng-model="sc.newSpell.damageType" type="text" class="form-control" placeholder="Damage Type"/>
 
                                 <label class="form-label">Damage Amount:</label>
-                                <input ng-model="sc.newSpell.damageAmount" type="text" class="form-control" placeholder="Damage Amount"/>
+                                <input id="damage" ng-model="sc.newSpell.damageAmount" type="text" class="form-control" placeholder="Damage Amount"/>
                             </div>
 
                             <label class="form-label">Casting Time:</label>
-                            <input ng-model="sc.newSpell.castingTime" type="text" class="form-control" placeholder="Spell Casting Time" required/>
+                            <input id="time" ng-model="sc.newSpell.castingTime" type="text" class="form-control" placeholder="Spell Casting Time" required/>
 
                             <label class="form-label">Range/Area:</label>
-                            <input ng-model="sc.newSpell.range" type="text" class="form-control" placeholder="Spell Range and Area" required/>
+                            <input id="range" ng-model="sc.newSpell.range" type="text" class="form-control" placeholder="Spell Range and Area" required/>
 
                             <label class="form-label">Components:</label>
-                            <input ng-model="sc.newSpell.components" type="text" class="form-control" placeholder="Spell Components"/>
+                            <input id="components" ng-model="sc.newSpell.components" type="text" class="form-control" placeholder="Spell Components"/>
 
                             <label class="form-label">Duration:</label>
-                            <input ng-model="sc.newSpell.duration" type="text" class="form-control" placeholder="Spell Duration" required/>
+                            <input id="duration" ng-model="sc.newSpell.duration" type="text" class="form-control" placeholder="Spell Duration" required/>
                             
                             <label class="form-label">Save Required?</label>
-                            <input type="checkbox" class="form-check" ng-model="SaveRequired"/>
+                            <input id="saveToggle" type="checkbox" class="form-check" ng-model="SaveRequired"/>
 
                             <div ng-if="SaveRequired" class="d-flex flex-column">
                                 <label class="form-label">Save:</label>
-                                <input ng-model="sc.newSpell.save" type="text" class="form-control" placeholder="Save Type"/>
+                                <input id="save" ng-model="sc.newSpell.save" type="text" class="form-control" placeholder="Save Type"/>
                             </div>
 
                             <label class="form-label">Description</label>
-                            <textarea ng-model="sc.newSpell.description" class="form-control" rows="4" maxlength="600" placeholder="Spell Description"></textarea>
+                            <textarea id="description" ng-model="sc.newSpell.description" class="form-control" rows="4" maxlength="600" placeholder="Spell Description"></textarea>
                             
-                            <button class="btn btn-primary mt-2" ng-click="sc.createSpell()" ng-disabled="newSpellForm.$invalid">Add Spell!</button>
+                            <button id="addSpell" class="btn btn-primary mt-2" ng-click="sc.createSpell()" ng-disabled="newSpellForm.$invalid">Add Spell!</button>
                         </form>
                     </div>
 

@@ -32,10 +32,10 @@ public class SpellService {
      * @param data The provided spell from the front end.
      * @return The saved or updated spell.
      */
-    public Spell createOrEditSpell(SpellData data) throws UserNotFoundException {
+    public SpellData createOrEditSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
-        return spell;
+        return spellToData(spell);
     }
 
     /**
@@ -108,7 +108,7 @@ public class SpellService {
         throw new SpellNotFoundException("Spell " + spellId + " not found.");
     }
 
-    private Spell dataToSpell(SpellData data) throws UserNotFoundException {
+    public Spell dataToSpell(SpellData data) throws UserNotFoundException {
         Spell spell = new Spell();
 
         spell.setId(data.getId());
@@ -134,7 +134,7 @@ public class SpellService {
         return spell;
     }
 
-    private SpellData spellToData(Spell spell) {
+    public SpellData spellToData(Spell spell) {
         SpellData data = new SpellData();
 
         data.setId(spell.getId());

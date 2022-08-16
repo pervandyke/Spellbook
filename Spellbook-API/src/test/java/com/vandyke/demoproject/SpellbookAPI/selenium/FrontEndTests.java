@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,6 +20,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class FrontEndTests {
     
     WebDriver driver;
+    JavascriptExecutor js;
 
     String user;
     String password = "TestPass";
@@ -35,7 +37,8 @@ public class FrontEndTests {
         //System.setProperty("webdriver.chrome.driver", "C:\\Users\\per.van.dyke\\SeleniumDrivers\\chromedriver.exe");
         
         driver = WebDriverManager.chromedriver().create();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        js = (JavascriptExecutor) driver;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
     }
 
@@ -204,6 +207,55 @@ public class FrontEndTests {
 
         String error = driver.findElement(By.id("error")).getText();
         assertEquals("Username not found", error);
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenValidInput_whenAddSpellButtonClicked_spellIsCreated() {
+        driver.get(BASE_URL + "login-page");
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(password);
+
+        sleep(1000l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        WebElement nameField = driver.findElement(By.id("name"));
+        WebElement levelField = driver.findElement(By.id("level"));
+        WebElement timeField = driver.findElement(By.id("time"));
+        WebElement rangeField = driver.findElement(By.id("range"));
+        WebElement componentField = driver.findElement(By.id("components"));
+        WebElement durationField = driver.findElement(By.id("duration"));
+        WebElement addSpell = driver.findElement(By.id("addSpell"));
+
+        nameField.sendKeys("Test Spell");
+        levelField.sendKeys("0");
+        timeField.sendKeys("1 Action");
+        rangeField.sendKeys("100ft");
+        componentField.sendKeys("V,S");
+        durationField.sendKeys("Instantaneous");
+
+        js.executeScript("arguments[0].scrollIntoView();", addSpell);
+
+        sleep(1000l);
+
+        new Actions(driver)
+            .moveToElement(addSpell)
+            .click().perform();
+
+        //Confirm spell is on the page
+
+        WebElement spellName = driver.findElement(By.xpath("//*[text()='Test Spell']"));;
+        assertEquals("Test Spell", spellName.getText());
+
+        sleep(1000l);
+         
     }
 
     private void sleep(Long millis) {
