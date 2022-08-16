@@ -1,6 +1,7 @@
 package com.vandyke.demoproject.SpellbookAPI.selenium;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.Duration;
 
@@ -58,7 +59,7 @@ public class FrontEndTests {
             .click()
             .perform();
 
-        sleep(1000l);
+        sleep(500l);
         
         WebElement usernameField = driver.findElement(By.id("username"));
         WebElement passwordField = driver.findElement(By.id("password"));
@@ -67,17 +68,17 @@ public class FrontEndTests {
         usernameField.sendKeys(user);
         passwordField.sendKeys(password);
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(submit)
             .click().perform();
         
-        sleep(1000l);
+        sleep(500l);
 
         String pageHeader = driver.findElement(By.id("userWelcome")).getText();
         assertEquals(user+"'s Spellbook", pageHeader);
-        sleep(1000l);
+        sleep(500l);
     }
 
     @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
@@ -91,7 +92,7 @@ public class FrontEndTests {
             .click()
             .perform();
 
-        sleep(1000l);
+        sleep(500l);
 
         WebElement usernameField = driver.findElement(By.id("username"));
         WebElement passwordField = driver.findElement(By.id("password"));
@@ -100,13 +101,13 @@ public class FrontEndTests {
         usernameField.sendKeys(user);
         passwordField.sendKeys(password);
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(submit)
             .click().perform();
         
-        sleep(1000l);
+        sleep(500l);
 
         String error = driver.findElement(By.id("error")).getText();
         assertEquals("User Already Exists", error);
@@ -123,7 +124,7 @@ public class FrontEndTests {
             .click()
             .perform();
 
-        sleep(1000l);
+        sleep(500l);
 
         WebElement usernameField = driver.findElement(By.id("username"));
         WebElement passwordField = driver.findElement(By.id("password"));
@@ -132,17 +133,17 @@ public class FrontEndTests {
         usernameField.sendKeys(user);
         passwordField.sendKeys(password);
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(submit)
             .click().perform();
         
-        sleep(1000l);
+        sleep(500l);
 
         String pageHeader = driver.findElement(By.id("userWelcome")).getText();
         assertEquals(user+"'s Spellbook", pageHeader);
-        sleep(1000l);
+        sleep(500l);
     }
 
     @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
@@ -156,7 +157,7 @@ public class FrontEndTests {
             .click()
             .perform();
 
-        sleep(1000l);
+        sleep(500l);
 
         WebElement usernameField = driver.findElement(By.id("username"));
         WebElement passwordField = driver.findElement(By.id("password"));
@@ -165,13 +166,13 @@ public class FrontEndTests {
         usernameField.sendKeys(user);
         passwordField.sendKeys("wrongPassword");
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(submit)
             .click().perform();
         
-        sleep(1000l);
+        sleep(500l);
 
         String error = driver.findElement(By.id("error")).getText();
         assertEquals("Password Incorrect", error);
@@ -188,7 +189,7 @@ public class FrontEndTests {
             .click()
             .perform();
 
-        sleep(1000l);
+        sleep(500l);
 
         WebElement usernameField = driver.findElement(By.id("username"));
         WebElement passwordField = driver.findElement(By.id("password"));
@@ -197,13 +198,13 @@ public class FrontEndTests {
         usernameField.sendKeys("ImaginaryUser");
         passwordField.sendKeys(password);
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(submit)
             .click().perform();
         
-        sleep(1000l);
+        sleep(500l);
 
         String error = driver.findElement(By.id("error")).getText();
         assertEquals("Username not found", error);
@@ -220,7 +221,7 @@ public class FrontEndTests {
         usernameField.sendKeys(user);
         passwordField.sendKeys(password);
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(submit)
@@ -243,7 +244,7 @@ public class FrontEndTests {
 
         js.executeScript("arguments[0].scrollIntoView();", addSpell);
 
-        sleep(1000l);
+        sleep(500l);
 
         new Actions(driver)
             .moveToElement(addSpell)
@@ -254,8 +255,33 @@ public class FrontEndTests {
         WebElement spellName = driver.findElement(By.xpath("//*[text()='Test Spell']"));;
         assertEquals("Test Spell", spellName.getText());
 
-        sleep(1000l);
+        sleep(500l);
          
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenIncompleteSpellInput_addSpellButtonShouldBeDisabed() {
+        driver.get(BASE_URL + "login-page");
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(password);
+
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+
+        WebElement addSpell = driver.findElement(By.id("addSpell"));
+
+        assertFalse(addSpell.isEnabled());
+
+        sleep(500l);
+
     }
 
     private void sleep(Long millis) {
