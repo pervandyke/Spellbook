@@ -20,7 +20,6 @@ import com.vandyke.demoproject.SpellbookAPI.exeptions.UserNotFoundException;
 import com.vandyke.demoproject.SpellbookAPI.exeptions.SpellNotFoundException;
 import com.vandyke.demoproject.SpellbookAPI.frontEndObjects.SpellData;
 import com.vandyke.demoproject.SpellbookAPI.models.ResponseString;
-import com.vandyke.demoproject.SpellbookAPI.models.Spell;
 import com.vandyke.demoproject.SpellbookAPI.services.SpellService;
 
 @RestController
