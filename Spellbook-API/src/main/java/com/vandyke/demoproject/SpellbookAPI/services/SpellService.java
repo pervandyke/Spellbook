@@ -27,15 +27,15 @@ public class SpellService {
     
     
     /**
-     * Save the spell to a DB.
+     * If the spell does not exist save it to the DB. Otherwise edit the existing spell.
      * 
      * @param data The provided spell from the front end.
-     * @return A confirmation String.
+     * @return The saved or updated spell.
      */
-    public ResponseString createSpell(SpellData data) throws UserNotFoundException {
+    public SpellData createOrEditSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
-        return new ResponseString("Spell " + spell.getName() + " was saved.");
+        return spellToData(spell);
     }
 
     /**
@@ -46,11 +46,11 @@ public class SpellService {
      * @return A confirmation String.
      * @throws UserNotFoundException
      */
-    public ResponseString editSpell(SpellData data) throws UserNotFoundException {
+    /*public Spell editSpell(SpellData data) throws UserNotFoundException {
         Spell spell = dataToSpell(data);
         spell = spellRepo.save(spell);
-        return new ResponseString("Spell " + spell.getName() + " was edited.");
-    }
+        return spell;
+    }*/
 
     /**
      * Gets a single spell by its Id.
@@ -59,25 +59,25 @@ public class SpellService {
      * @return The SpellData for the requested spell.
      * @throws SpellNotFoundException
      */
-    public SpellData getSpellById(Long id) throws SpellNotFoundException {
+    /*public SpellData getSpellById(Long id) throws SpellNotFoundException {
         Optional<Spell> spell = spellRepo.findById(id);
         if (spell.isPresent()) {
             SpellData spellData = spellToData(spell.get());
             return spellData;
         }
         throw new SpellNotFoundException("Spell with id " + id + " not found.");
-    }
+    }*/
 
     /**
      * Get all spells in the DB.
      * 
      * @return A list of all spells in the DB.
      */
-    public List<SpellData> getSpells() {
+    /*public List<SpellData> getSpells() {
         List<Spell> spellList = spellRepo.findAll();
         List<SpellData> spellDataList = spellList.stream().map((spell) -> spellToData(spell)).collect(Collectors.toList());
         return  spellDataList;
-    }
+    }*/
     
     /**
      * Get all spells belonging to a given user id.
@@ -100,12 +100,15 @@ public class SpellService {
      * @param spellId The id of the spell to be deleted.
      * @return A confirmation String.
      */
-    public ResponseString deleteSpell(Long spellId) throws UserNotFoundException, SpellNotFoundException {
-        spellRepo.deleteById(spellId);
-        return new ResponseString("Spell " + spellId + " was deleted.");
+    public ResponseString deleteSpell(Long spellId) throws SpellNotFoundException {
+        if (spellRepo.existsById(spellId)) {
+            spellRepo.deleteById(spellId);
+            return new ResponseString("Spell " + spellId + " was deleted.");
+        }
+        throw new SpellNotFoundException("Spell " + spellId + " not found.");
     }
 
-    private Spell dataToSpell(SpellData data) throws UserNotFoundException {
+    public Spell dataToSpell(SpellData data) throws UserNotFoundException {
         Spell spell = new Spell();
 
         spell.setId(data.getId());
@@ -131,7 +134,7 @@ public class SpellService {
         return spell;
     }
 
-    private SpellData spellToData(Spell spell) {
+    public SpellData spellToData(Spell spell) {
         SpellData data = new SpellData();
 
         data.setId(spell.getId());

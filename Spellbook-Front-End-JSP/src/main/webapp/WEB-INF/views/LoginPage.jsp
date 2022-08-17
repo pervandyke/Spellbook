@@ -26,9 +26,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="flex-grow: 0;">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="/">Home</a>
-                        <a class="nav-link active" aria-current="page" href="/login-page">Login</a>
-                        <a class="nav-link" href="/register-page">Register</a>
+                        <a id="homeNav" class="nav-link" href="/">Home</a>
+                        <a id="loginNav" class="nav-link active" aria-current="page" href="/login-page">Login</a>
+                        <a id="registerNav" class="nav-link" href="/register-page">Register</a>
                     </div>
                 </div>
             </div>
@@ -39,15 +39,15 @@
             <div class="card mt-3">
                 <h3 class="card-header">Login</h3>
                 <div class="card-body p-4">
-                    <form action="/spellbook" method="POST">
+                    <form id="loginForm" action="/spellbook" method="POST">
 	                    <label>Username</label>
 	                    <input type="text" id="username" name="username" class="form-control" placeholder="username" autofocus="" required/>
 	                    
 	                    <label>Password</label>
 	                    <input type="password" id="password" name="password" class="form-control" placeholder="password" required/>
 	                    
-	                    <input type="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
-	                    <div style="background-color: white; color: red">${error}</div>
+	                    <input id="submit" class="btn btn-primary mt-2" type="submit" value="Submit">
+	                    <div id="error" style="background-color: white; color: red">${error}</div>
                     </form>
                 </div>
             </div>
