@@ -26,9 +26,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="flex-grow: 0;">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                        <a class="nav-link" href="/login-page">Login</a>
-                        <a class="nav-link" href="/register-page">Register</a>
+                        <a id="homeNav" class="nav-link active" href="/">Home</a>
+                        <a id="loginNav" class="nav-link" aria-current="page" href="/login-page">Login</a>
+                        <a id="registerNav" class="nav-link" href="/register-page">Register</a>
                     </div>
                 </div>
             </div>
