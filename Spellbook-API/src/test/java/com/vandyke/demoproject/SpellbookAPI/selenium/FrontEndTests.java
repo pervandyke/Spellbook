@@ -2,6 +2,7 @@ package com.vandyke.demoproject.SpellbookAPI.selenium;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 
@@ -47,6 +48,8 @@ public class FrontEndTests {
     public void cleanUp() {
         driver.quit();
     }
+
+    /* REGISTER FORM TESTS */
 
     @Test
     public void givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn() {
@@ -112,6 +115,50 @@ public class FrontEndTests {
         String error = driver.findElement(By.id("error")).getText();
         assertEquals("User Already Exists", error);
     }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenNoEnteredPassword_whenRegisterButtonClicked_nothingShouldHappen() {
+        driver.get(BASE_URL + "register-page");
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(500l);
+
+        WebElement form = driver.findElement(By.id("registerForm"));
+        assertTrue(form.isEnabled());
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenNoEnteredUsername_whenRegisterButtonClicked_nothingShouldHappen() {
+        driver.get(BASE_URL + "register-page");
+
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        passwordField.sendKeys(password);
+
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(500l);
+
+        WebElement form = driver.findElement(By.id("registerForm"));
+        assertTrue(form.isEnabled());
+    }
+
+    /* LOGIN FORM TESTS */
 
     @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
     public void givenValidInput_whenLoginButtonClicked_userIsLoggedIn() {
@@ -209,6 +256,50 @@ public class FrontEndTests {
         String error = driver.findElement(By.id("error")).getText();
         assertEquals("Username not found", error);
     }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenNoEnteredPassword_whenLoginButtonClicked_nothingShouldHappen() {
+        driver.get(BASE_URL + "login-page");
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(500l);
+
+        WebElement form = driver.findElement(By.id("loginForm"));
+        assertTrue(form.isEnabled());
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenNoEnteredUsername_whenLoginButtonClicked_nothingShouldHappen() {
+        driver.get(BASE_URL + "login-page");
+
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        passwordField.sendKeys(password);
+
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        sleep(500l);
+
+        WebElement form = driver.findElement(By.id("loginForm"));
+        assertTrue(form.isEnabled());
+    }
+
+    /* SPELL FORM TESTS */
 
     @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
     public void givenValidInput_whenAddSpellButtonClicked_spellIsCreated() {

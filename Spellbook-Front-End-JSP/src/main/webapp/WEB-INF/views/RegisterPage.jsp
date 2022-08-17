@@ -39,7 +39,7 @@
             <div class="card mt-3">
                 <h3 class="card-header">Register</h3>
                 <div class="card-body p-4">
-                    <form action="/register" method="POST">
+                    <form id="registerForm" action="/register" method="POST">
 	                    <label>Username</label>
 	                    <input type="text" id="username" name="username" class="form-control" placeholder="username" autofocus="" required/>
 	                    
