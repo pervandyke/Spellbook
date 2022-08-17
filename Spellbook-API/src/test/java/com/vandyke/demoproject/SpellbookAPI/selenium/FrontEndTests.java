@@ -36,8 +36,6 @@ public class FrontEndTests {
     
     @BeforeTest
     public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\per.van.dyke\\SeleniumDrivers\\chromedriver.exe");
-        
         driver = WebDriverManager.chromedriver().create();
         js = (JavascriptExecutor) driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -351,7 +349,79 @@ public class FrontEndTests {
     }
 
     @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
-    public void givenIncompleteSpellInput_addSpellButtonShouldBeDisabed() {
+    public void givenFullInput_whenAddSpellButtonClicked_spellIsCreated() {
+        driver.get(BASE_URL + "login-page");
+
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement submit = driver.findElement(By.id("submit"));
+
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(password);
+
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(submit)
+            .click().perform();
+        
+        WebElement nameField = driver.findElement(By.id("name"));
+        WebElement levelField = driver.findElement(By.id("level"));
+        WebElement damageToggle = driver.findElement(By.id("damageToggle"));
+        WebElement timeField = driver.findElement(By.id("time"));
+        WebElement rangeField = driver.findElement(By.id("range"));
+        WebElement componentField = driver.findElement(By.id("components"));
+        WebElement durationField = driver.findElement(By.id("duration"));
+        WebElement saveToggle = driver.findElement(By.id("saveToggle"));
+        WebElement descriptionField = driver.findElement(By.id("description"));
+        WebElement addSpell = driver.findElement(By.id("addSpell"));
+
+        nameField.sendKeys("Full Test Spell");
+        levelField.sendKeys("0");
+        
+        new Actions(driver)
+            .moveToElement(damageToggle)
+            .click().perform();
+        
+        WebElement damageTypeField = driver.findElement(By.id("damageType"));
+        WebElement damageAmountField = driver.findElement(By.id("damage"));
+        damageTypeField.sendKeys("Fire");
+        damageAmountField.sendKeys("1d8");
+
+        js.executeScript("arguments[0].scrollIntoView();", addSpell);
+        sleep(500l);
+
+        timeField.sendKeys("1 Action");
+        rangeField.sendKeys("100ft");
+        componentField.sendKeys("V,S");
+        durationField.sendKeys("Instantaneous");
+
+        new Actions(driver)
+            .moveToElement(saveToggle)
+            .click().perform();
+
+        WebElement saveField = driver.findElement(By.id("save"));
+        saveField.sendKeys("DEX");
+        descriptionField.sendKeys("Test Fire Spell");
+
+        js.executeScript("arguments[0].scrollIntoView();", addSpell);
+        sleep(500l);
+
+        new Actions(driver)
+            .moveToElement(addSpell)
+            .click().perform();
+
+        //Confirm spell is on the page
+
+        WebElement spellName = driver.findElement(By.xpath("//*[text()='Full Test Spell']"));;
+        assertEquals("Full Test Spell", spellName.getText());
+
+        sleep(500l);
+         
+    }
+
+    @Test(dependsOnMethods = {"givenValidInput_whenRegisterButtonClicked_userIsCreatedAndLoggedIn"})
+    public void givenEmptySpellInput_addSpellButtonShouldBeDisabed() {
         driver.get(BASE_URL + "login-page");
 
         WebElement usernameField = driver.findElement(By.id("username"));
